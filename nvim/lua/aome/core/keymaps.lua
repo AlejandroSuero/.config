@@ -1,10 +1,4 @@
-local keymap = vim.keymap.set
-
-local M = {}
-M.opts = { noremap = true, silent = true }
-M.term_opts = { silent = true }
-
-M.mappings = {
+local mappings = {
     i = { -- insert mode
         ["jk"] = "<ESC>",
         ["<C-c>"] = "<ESC>"
@@ -67,20 +61,5 @@ M.mappings = {
     },
 }
 
-M.map_keys = function(mappings_table)
-    local options = M.opts
-    for mode, mappings in pairs(mappings_table) do
-        if mode == 't' then
-            options = M.term_opts
-        else
-            options = M.opts
-        end
-        for lhs, rhs in pairs(mappings) do
-            keymap(mode, lhs, rhs, options)
-        end
-    end
-end
+require("aome.core.utils").map_keys(mappings)
 
-M.map_keys(M.mappings)
-
-return M

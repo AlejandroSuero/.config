@@ -4,5 +4,5 @@ local mappings = {
     }
 }
 
-require("aome.core.keymaps").map_keys(mappings)
+require("aome.core.utils").map_keys(mappings)
 

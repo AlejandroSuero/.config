@@ -99,6 +99,18 @@ return packer.startup(function(use)
         }
     }
 
+    -- LUALINE
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
+
+    -- GLOW (markdown)
+    use {
+        "ellisonleao/glow.nvim",
+        ft = "markdown"
+    }
+
     -- ZEN MODE
     use "folke/zen-mode.nvim"
 
