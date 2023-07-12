@@ -1,0 +1,47 @@
+#!/usr/bin/env zsh
+
+FONT_FACE="JetBrainsMonoNL Nerd Font"
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins-desktop"
+PLUGIN_SHARED_DIR="$HOME/.config/sketchybar/plugins"
+ITEMS_DIR="$HOME/.config/sketchybar/items"
+
+
+source "$HOME/.config/sketchybar/colors.sh"
+source "$HOME/.config/sketchybar/icons.sh"
+
+sketchybar --bar \
+    height=30 \
+    color=0x50494d64 \
+    margin=0 \
+    sticky=on \
+    padding_left=12 \
+    padding_right=12 \
+    notch_width=188 \
+    blur_radius=100 \
+    display=main
+
+sketchybar --default \
+    background.height=32 \
+    icon.color=0xff24273a \
+    icon.font="$FONT_FACE:Medium:20.0" \
+    icon.padding_left=5 \
+    icon.padding_right=5 \
+    label.color=0xff24273a \
+    label.font="$FONT_FACE:Bold:14.0" \
+    label.y_offset=1 \
+    label.padding_left=0 \
+    label.padding_right=5
+
+source "$ITEMS_DIR/spaces.sh"
+
+source "$ITEMS_DIR/clock.sh"
+
+source "$ITEMS_DIR/battery.sh"
+
+source "$ITEMS_DIR/wifi.sh"
+
+source "$ITEMS_DIR/spotify.sh"
+
+##### Finalizing Setup #####
+sketchybar --update
+sketchybar --trigger space_change
