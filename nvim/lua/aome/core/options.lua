@@ -28,6 +28,8 @@ local options = {
         scrolloff = 13,
         signcolumn = "yes",
 
+        winblend = 0,
+
         updatetime = 50,
 
         colorcolumn = "80",

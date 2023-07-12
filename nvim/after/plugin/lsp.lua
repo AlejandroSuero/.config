@@ -10,6 +10,7 @@ lsp.ensure_installed({
   "gopls",
   "lua_ls",
   "eslint",
+  "emmet_ls"
 })
 
 -- Fix Undefined global "vim"
