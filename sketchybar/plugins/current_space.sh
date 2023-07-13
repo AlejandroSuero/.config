@@ -8,40 +8,52 @@ update_space() {
 
     case $SPACE_ID in
     1)
-        ICON="$TERMINAL_ICON terminal"
+        ICON=$TERMINAL_ICON
         ICON_FONT="$FONT_FACE:Bold:20.0"
         ICON_PADDING_LEFT=10
         ICON_PADDING_RIGHT=10
+        LABEL="terminal"
+        LABEL_FONT="$FONT_FACE:Medium:15.0"
         ;;
     2)
-        ICON="$CHROME_ICON  web"
+        ICON=$CHROME_ICON
         ICON_FONT="$FONT_FACE:Bold:20.0"
         ICON_PADDING_LEFT=10
         ICON_PADDING_RIGHT=10
+        LABEL="browser"
+        LABEL_FONT="$FONT_FACE:Medium:15.0"
         ;;
     3)
-        ICON="$MOBILE_ICON simulators"
-        ICON_FONT="$FONT_FACE:Bold:20.0"
+        ICON=$MOBILE_ICON
+        ICON_FONT="$FONT_FACE:Bold:25.0"
         ICON_PADDING_LEFT=10
         ICON_PADDING_RIGHT=10
+        LABEL="simulators"
+        LABEL_FONT="$FONT_FACE:Medium:15.0"
         ;;
     4)
-        ICON="$KRITA_ICON  art"
+        ICON=$KRITA_ICON
         ICON_FONT="$FONT_FACE:Bold:20.0"
         ICON_PADDING_LEFT=10
         ICON_PADDING_RIGHT=10
+        LABEL="art"
+        LABEL_FONT="$FONT_FACE:Medium:15.0"
         ;;
     5)
-        ICON="$SPOTIFY_ICON  music"
+        ICON=$SPOTIFY_ICON
         ICON_FONT="$FONT_FACE:Bold:20.0"
         ICON_PADDING_LEFT=10
         ICON_PADDING_RIGHT=10
+        LABEL="music"
+        LABEL_FONT="$FONT_FACE:Medium:15.0"
         ;;
     *)
         ICON=$SPACE_ID
         ICON_FONT="$FONT_FACE:Bold:20.0"
         ICON_PADDING_LEFT=10
         ICON_PADDING_RIGHT=10
+        LABEL="general"
+        LABEL_FONT="$FONT_FACE:Medium:15.0"
         ;;
     esac
 
@@ -50,6 +62,12 @@ update_space() {
         icon.font=$ICON_FONT
         icon.padding_left=$ICON_PADDING_LEFT \
         icon.padding_right=$ICON_PADDING_RIGHT
+
+    sketchybar --set $NAME \
+        label.padding_left=5 \
+        label.padding_right=5 \
+        label=$LABEL \
+        label.font=$LABEL_FONT
 }
 
 case "$SENDER" in
