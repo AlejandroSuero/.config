@@ -1,7 +1,9 @@
 local mappings = {
-	n = {
-		["<leader>gs"] = vim.cmd.Git
-	}
+    n = {
+        ["<leader>gs"] = function()
+            vim.cmd("tab Git")
+        end
+    }
 }
 
 local aome_fugitive = vim.api.nvim_create_augroup("aome_fugitive", {})
@@ -16,10 +18,10 @@ autocmd("BufWinEnter", {
         end
 
         local bufnr = vim.api.nvim_get_current_buf()
-        local opts = {buffer = bufnr, remap = false}
+        local opts = { buffer = bufnr, remap = false }
 
         -- Commit changes
-        vim.keymap.set("n", "<leader>gcm", function ()
+        vim.keymap.set("n", "<leader>gcm", function()
             vim.cmd.Git("commit")
         end)
 
@@ -30,7 +32,7 @@ autocmd("BufWinEnter", {
 
         -- rebase always
         vim.keymap.set("n", "<leader>P", function()
-            vim.cmd.Git({'pull',  '--rebase'})
+            vim.cmd.Git({ 'pull', '--rebase' })
         end, opts)
 
         -- NOTE: It allows me to easily set the branch i am pushing and any tracking
