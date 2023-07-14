@@ -4,6 +4,47 @@ if not ok then
     return
 end
 
+telescope.setup {
+    defaults = {
+        file_ignore_patterns = { ".git/", "node_modules" },
+        layout_config = {
+            prompt_position = "top"
+        },
+        path_display = { "smart" },
+        prompt_position = "top",
+        prompt_prefix = " 󰍉 ",
+        selection_caret = "  ",
+        sorting_strategy = "ascending"
+    },
+    pickers = {
+        colorscheme = {
+            prompt_prefix = " 󰏘 "
+        },
+        find_files = {
+            prompt_prefix = " 󰈔 ",
+            find_command = { "rg", "--files", "--hidden" }
+        },
+        git_files = {
+            prompt_prefix = " 󰊢 ",
+            show_untracked = true
+        },
+        keymaps = {
+            prompt_prefix = " 󰌌 "
+        },
+        commands = {
+            prompt_prefix = "  "
+        },
+        help_tags = {
+            prompt_prefix = " 󰞋 "
+        },
+        grep_string = {
+            prompt_prefix = " 󰬶 "
+        }
+    }
+}
+
+telescope.load_extension("harpoon")
+
 local builtin = require("telescope.builtin")
 
 -- local opts = { noremap = true, silent = true }
@@ -22,7 +63,9 @@ local mappings = {
         -- keymaps
         ["<leader>km"] = builtin.keymaps,
         -- help tags
-        ["<leader>ht"] = builtin.help_tags
+        ["<leader>ht"] = builtin.help_tags,
+        -- commands
+        ["<A-p>"] = builtin.commands
     }
 }
 
