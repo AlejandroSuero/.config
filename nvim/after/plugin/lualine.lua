@@ -3,6 +3,14 @@ if not ok then
     return
 end
 
+--[[--
+Shows lsp client name
+@return Lsp client name
+]]
+local show_lsp = function()
+    return string.format("%s %s", " ", vim.lsp.get_active_clients()[1].config.name)
+end
+
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -30,7 +38,9 @@ lualine.setup({
             'encoding',
             'filetype',
         },
-        lualine_y = { 'progress' },
+        lualine_y = { function()
+            return show_lsp()
+        end },
         lualine_z = { 'location' },
     },
     inactive_sections = {
