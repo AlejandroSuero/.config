@@ -45,7 +45,7 @@ local mappings = {
         ["<leader>epp"] = "<cmd>e ~/.config/nvim/lua/aome/packer.lua<CR>",
 
         -- tabclose
-        ["<leader>tc"] = "<cmd>tabclose<CR>"
+        ["<leader>X"] = "<cmd>tabclose<CR>"
     },
     v = { -- visual mode
         -- move block of code
