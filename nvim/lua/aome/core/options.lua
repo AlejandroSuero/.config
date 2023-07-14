@@ -1,7 +1,13 @@
+local env = vim.env
+
 local options = {
     opt = { -- opt scope
         guicursor = "",
         guifont = "*",
+
+        cmdheight = 0,
+
+        shell = env.SHELL,
 
         number = true,
         relativenumber = true,
