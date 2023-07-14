@@ -12,6 +12,7 @@ $all[╰─](blue)$character"""
 [character]
 success_symbol = "[ ](blue)"
 error_symbol = "[ ](red)"
+vicmd_symbol = "[](green)"
 
 # No need for env variables as starship provides a way to show your current distro
 [os]
