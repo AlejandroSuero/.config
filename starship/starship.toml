@@ -21,8 +21,8 @@ disabled = false
 
 [os.symbols]
 Windows = " "
-Arch = "󰣇"
-Ubuntu = ""
+Arch = "󰣇 "
+Ubuntu = " "
 Macos = "󰀵 "
 
 # Shows the username
