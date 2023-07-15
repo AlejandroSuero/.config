@@ -5,18 +5,18 @@ add_newline = true
 
 # Change the default prompt format
 format = """\
-[╭╴](blue)$os\
-$all[╰─](blue)$character"""
+[╭╴](#89b4fa)$os\
+$all[╰─](#89b4fa)$character"""
 
 # Change the default prompt characters
 [character]
-success_symbol = "[ ](blue)"
+success_symbol = "[ ](#89b4fa)"
 error_symbol = "[ ](red)"
 vicmd_symbol = "[](green)"
 
 # No need for env variables as starship provides a way to show your current distro
 [os]
-format ='[$symbol](blue)'
+format ='[$symbol](#89b4fa)'
 disabled = false
 
 [os.symbols]
@@ -38,7 +38,7 @@ truncation_length = 3
 truncation_symbol = ".../"
 home_symbol = "󰋞 ~"
 read_only_style = "red"
-style = "bold blue"
+style = "bold #89b4fa"
 read_only = "  "
 format = "at [$path]($style)[$read_only]($read_only_style) "
 
@@ -71,7 +71,7 @@ format = "via [ terraform $version]($style) 壟 [$workspace]($style) "
 format = "via [ vagrant $version]($style) "
 
 [docker_context]
-format = "via [ $context](bold blue) "
+format = "via [ $context](bold #89b4fa) "
 
 [helm]
 format = "via [ $version](bold purple) "
