@@ -50,17 +50,21 @@ update_track() {
         fi
 
         sketchybar --set $NAME label="${TRACK}  ${ARTIST}" label.drawing=yes background.color=$BLUE \
-            icon.padding_left=10 \
+            icon.padding_left=20 \
             icon.padding_right=10 \
+            label.color=$GREY \
             icon.color=$GREY \
-            label.padding_right=10
+            label.padding_right=20
 
 
     elif [ $PLAYER_STATE = "Paused" ]; then
 
         sketchybar --set $NAME background.color=$GREY \
-            icon.padding_left=10 \
+            icon.padding_left=20 \
+            label.color=$BLUE \
             icon.color=$BLUE \
+            label.drawing=yes \
+            label.padding_right=20 \
             icon.padding_right=10
 
 
@@ -68,6 +72,8 @@ update_track() {
 
         sketchybar --set $NAME background.color=$GREY label.drawing=no \
             icon.color=$BLUE \
+            label.color=$BLUE \
+            label.drawing=off \
             icon.padding_left=50 \
             icon.padding_right=50
 
@@ -76,6 +82,8 @@ update_track() {
 
         sketchybar --set $NAME background.color=$GREY \
             icon.color=$BLUE \
+            label.color=$BLUE \
+            label.drawing=off \
             icon.padding_left=50 \
             icon.padding_right=50
 
