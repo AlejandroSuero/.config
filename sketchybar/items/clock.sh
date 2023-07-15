@@ -5,15 +5,15 @@ sketchybar --add item clock right \
     label.padding_right=10 \
     label.padding_left=10 \
     icon.y_offset=1 \
-    background.color=$RED \
+    background.color=$BLUE \
     update_freq=10 \
     script="$PLUGIN_SHARED_DIR/clock.sh"
 
 sketchybar --add item clock.separator right \
     --set clock.separator \
-    background.color=$GREEN \
+    background.color=$GREY \
     icon= \
-    icon.color=$RED \
+    icon.color=$BLUE \
     icon.font="$FONT_FACE:Bold:23.0" \
     icon.padding_left=0 \
     icon.padding_right=-1 \

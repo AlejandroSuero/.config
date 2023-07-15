@@ -3,6 +3,8 @@
 # Max number of characters so it fits nicely to the right of the notch
 # MAY NOT WORK WITH NON-ENGLISH CHARACTERS
 
+source "$HOME/.config/sketchybar/colors.sh"
+
 MAX_LENGTH=35
 
 # Logic starts here, do not modify
@@ -14,7 +16,7 @@ SPOTIFY_JSON="$INFO"
 update_track() {
 
     if [[ -z $SPOTIFY_JSON ]]; then
-        sketchybar --set $NAME background.color=0xffeed49f label.drawing=no \
+        sketchybar --set $NAME background.color=$YELLOW label.drawing=no \
             icon.padding_left=50 \
             icon.padding_right=50
         return
@@ -46,23 +48,35 @@ update_track() {
                 ARTIST="${ARTIST:0:$((MAX_LENGTH - TRACK_LENGTH - 1))}…"
             fi
         fi
-        sketchybar --set $NAME label="${TRACK}  ${ARTIST}" label.drawing=yes background.color=0xffa6da95 \
+
+        sketchybar --set $NAME label="${TRACK}  ${ARTIST}" label.drawing=yes background.color=$GREEN \
             icon.padding_left=10 \
             icon.padding_right=10 \
             label.padding_right=10
 
+
     elif [ $PLAYER_STATE = "Paused" ]; then
-        sketchybar --set $NAME background.color=0xffeed49f \
+
+        sketchybar --set $NAME background.color=$YELLOW \
             icon.padding_left=10 \
             icon.padding_right=10
+
+
     elif [ $PLAYER_STATE = "Stopped" ]; then
-        sketchybar --set $NAME background.color=0xffeed49f label.drawing=no \
+
+        sketchybar --set $NAME background.color=$YELLOW label.drawing=no \
             icon.padding_left=50 \
             icon.padding_right=50
+
+
     else
-        sketchybar --set $NAME background.color=0xffeed49f \
-            icon.padding_left=10 \
-            icon.padding_right=10
+
+        sketchybar --set $NAME background.color=$YELLOW \
+            icon.padding_left=50 \
+            icon.padding_right=50
+
+        echo $PLAYER_STATE
+
     fi
 }
 
