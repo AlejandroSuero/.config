@@ -12,6 +12,7 @@ sketchybar --add event spotify_change $SPOTIFY_EVENT \
     icon.y_offset=1 \
     label.drawing=off \
     label.padding_left=5 \
+    icon.color=$BLUE \
     background.padding_left=50 \
     background.padding_right=50 \
     script="$PLUGIN_DIR/spotify.sh" \

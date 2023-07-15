@@ -11,13 +11,13 @@ source "$HOME/.config/sketchybar/icons.sh"
 
 sketchybar --bar \
     height=30 \
-    color=0x50494d64 \
+    color=0xbb212232 \
     margin=0 \
     sticky=on \
-    padding_left=12 \
-    padding_right=12 \
+    padding_left=0 \
+    padding_right=0 \
     notch_width=188 \
-    blur_radius=100 \
+    blur_radius=50 \
     display=main
 
 sketchybar --default \

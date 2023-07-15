@@ -3,6 +3,7 @@ source "$HOME/.config/sketchybar/colors.sh"
 sketchybar --add item current_space left \
     --set current_space \
     background.color=$BLUE \
+    icon.padding_left=14 \
     label.drawing=on \
     script="$PLUGIN_SHARED_DIR/current_space.sh" \
     --subscribe current_space space_change mouse.clicked
