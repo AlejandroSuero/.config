@@ -1,3 +1,5 @@
+local plugins_path = "~/.config/nvim/lua/aome/packer.lua"
+
 local mappings = {
     i = { -- insert mode
         ["jk"] = "<ESC>",
@@ -5,7 +7,7 @@ local mappings = {
     },
     n = { -- normal mode
         -- explorer
-        ["<leader>pv"] = "<cmd>Ex<CR>",
+        ["<leader>pv"] = vim.cmd.Ex,
 
         -- navigation
         ["Y"] = "yg$",
@@ -36,16 +38,18 @@ local mappings = {
         ["<leader>s"] = [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 
         -- make executable
-        ["<leader>x"] =  "<cmd>!chmod +x %<CR>",
+        ["<leader>x"] = "<cmd>!chmod +x %<CR>",
 
         -- source file
         ["<leader>so"] = function() vim.cmd("so") end,
 
         -- edit plugins
-        ["<leader>epp"] = "<cmd>e ~/.config/nvim/lua/aome/packer.lua<CR>",
+        ["<leader>epp"] = function()
+            vim.cmd.edit(plugins_path)
+        end,
 
         -- tabclose
-        ["<leader>X"] = "<cmd>tabclose<CR>"
+        ["<leader>X"] = vim.cmd.tabclose
     },
     v = { -- visual mode
         -- move block of code
@@ -65,4 +69,3 @@ local mappings = {
 }
 
 require("aome.core.utils").map_keys(mappings)
-
