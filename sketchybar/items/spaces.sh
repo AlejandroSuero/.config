@@ -11,7 +11,7 @@ sketchybar --add item current_space left \
 sketchybar --add item front_app.separator left \
     --set front_app.separator \
     background.color=$GREY \
-    icon= \
+    icon=$SEPARATOR_RIGHT \
     icon.color=$BLUE \
     icon.font="$FONT_FACE:Bold:23.0" \
     icon.padding_left=0 \
@@ -33,7 +33,7 @@ sketchybar --add item window_title left \
 sketchybar --add item window_title.separator left \
     --set window_title.separator \
     background.color=$TRANSPARENT \
-    icon= \
+    icon=$SEPARATOR_RIGHT  \
     icon.color=$GREY \
     icon.font="$FONT_FACE:Bold:23.0" \
     icon.padding_left=0 \

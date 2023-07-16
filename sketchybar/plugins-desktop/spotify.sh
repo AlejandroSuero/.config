@@ -4,6 +4,7 @@
 # MAY NOT WORK WITH NON-ENGLISH CHARACTERS
 
 source "$HOME/.config/sketchybar/colors.sh"
+source "$HOME/.config/sketchybar/icons.sh"
 
 MAX_LENGTH=35
 
@@ -16,9 +17,24 @@ SPOTIFY_JSON="$INFO"
 update_track() {
 
     if [[ -z $SPOTIFY_JSON ]]; then
-        sketchybar --set $NAME background.color=$GREY label.drawing=no \
-            icon.padding_left=50 \
-            icon.padding_right=50
+
+        ICON_PADDING=50
+        ICON_COLOR=$BLUE
+        BG_COLOR=$GREY
+        LABEL_DRAWING=on
+
+    sketchybar --set spotify.separator_left \
+                     icon.color=$BG_COLOR \
+               --set $NAME \
+                     icon.color=$ICON_COLOR \
+                     label.color=$ICON_COLOR \
+                     background.color=$BG_COLOR \
+                     icon.padding_right=$ICON_PADDING \
+                     icon.padding_left=$ICON_PADDING \
+                     label.drawing=$LABEL_DRAWING \
+               --set spotify.separator_right \
+                     icon.color=$BG_COLOR
+
         return
     fi
 
@@ -49,47 +65,88 @@ update_track() {
             fi
         fi
 
-        sketchybar --set $NAME label="${TRACK}  ${ARTIST}" label.drawing=yes background.color=$BLUE \
-            icon.padding_left=20 \
-            icon.padding_right=10 \
-            label.color=$GREY \
-            icon.color=$GREY \
-            label.padding_right=20
+        ICON_PADDING=20
+        ICON_COLOR=$GREY
+        BG_COLOR=$BLUE
+        LABEL_DRAWING=on
 
+    sketchybar --set spotify.separator_left \
+                     icon.color=$BG_COLOR \
+               --set $NAME \
+                     label="${TRACK}  ${ARTIST}" \
+                     icon.color=$ICON_COLOR \
+                     label.drawing=$LABEL_DRAWING \
+                     label.color=$ICON_COLOR \
+                     background.color=$BG_COLOR \
+                     icon.padding_right=10 \
+                     icon.padding_left=$ICON_PADDING \
+                     label.padding_right=$ICON_PADDING \
+               --set spotify.separator_right \
+                     icon.color=$BG_COLOR
 
     elif [ $PLAYER_STATE = "Paused" ]; then
 
-        sketchybar --set $NAME background.color=$GREY \
-            icon.padding_left=20 \
-            label.color=$BLUE \
-            icon.color=$BLUE \
-            label.drawing=yes \
-            label.padding_right=20 \
-            icon.padding_right=10
+        ICON_PADDING=20
+        ICON_COLOR=$BLUE
+        BG_COLOR=$GREY
+        LABEL_DRAWING=on
 
+    sketchybar --set spotify.separator_left \
+                     icon.color=$BG_COLOR \
+               --set $NAME \
+                     icon.color=$ICON_COLOR \
+                     label.color=$ICON_COLOR \
+                     background.color=$BG_COLOR \
+                     icon.padding_right=10 \
+                     icon.padding_left=$ICON_PADDING \
+                     label.drawing=$LABEL_DRAWING \
+                     label.padding_right=$ICON_PADDING \
+               --set spotify.separator_right \
+                     icon.color=$BG_COLOR
 
     elif [ $PLAYER_STATE = "Stopped" ]; then
 
-        sketchybar --set $NAME background.color=$GREY label.drawing=no \
-            icon.color=$BLUE \
-            label.color=$BLUE \
-            label.drawing=off \
-            icon.padding_left=50 \
-            icon.padding_right=50
+        ICON_PADDING=50
+        ICON_COLOR=$BLUE
+        BG_COLOR=$GREY
+        LABEL_DRAWING=off
 
+    sketchybar --set spotify.separator_left \
+                     icon.color=$BG_COLOR \
+               --set $NAME \
+                     icon.color=$ICON_COLOR \
+                     label.color=$ICON_COLOR \
+                     background.color=$BG_COLOR \
+                     icon.padding_right=$ICON_PADDING \
+                     icon.padding_left=$ICON_PADDING \
+                     label.drawing=$LABEL_DRAWING \
+                     label.padding_right=$ICON_PADDING \
+               --set spotify.separator_right \
+                     icon.color=$BG_COLOR
 
     else
 
-        sketchybar --set $NAME background.color=$GREY \
-            icon.color=$BLUE \
-            label.color=$BLUE \
-            label.drawing=off \
-            icon.padding_left=50 \
-            icon.padding_right=50
+        ICON_PADDING=50
+        ICON_COLOR=$BLUE
+        BG_COLOR=$GREY
+        LABEL_DRAWING=off
 
-        echo $PLAYER_STATE
+    sketchybar --set spotify.separator_left \
+                     icon.color=$BG_COLOR \
+               --set $NAME \
+                     icon.color=$ICON_COLOR \
+                     label.color=$ICON_COLOR \
+                     background.color=$BG_COLOR \
+                     icon.padding_right=$ICON_PADDING \
+                     icon.padding_left=$ICON_PADDING \
+                     label.drawing=$LABEL_DRAWING \
+                     label.padding_right=$ICON_PADDING \
+               --set spotify.separator_right \
+                     icon.color=$BG_COLOR
 
     fi
+
+
 }
 
 case "$SENDER" in

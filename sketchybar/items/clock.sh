@@ -12,7 +12,7 @@ sketchybar --add item clock right \
 sketchybar --add item clock.separator right \
     --set clock.separator \
     background.color=$GREY \
-    icon= \
+    icon=$SEPARATOR_LEFT \
     icon.color=$BLUE \
     icon.font="$FONT_FACE:Bold:23.0" \
     icon.padding_left=0 \

@@ -21,7 +21,7 @@ sketchybar --add item           wifi.control right                      \
 sketchybar --add item wifi.separator right \
     --set wifi.separator \
     background.color=$TRANSPARENT \
-    icon= \
+    icon=$SEPARATOR_LEFT \
     icon.color=$GREY \
     icon.font="$FONT_FACE:Bold:23.0" \
     icon.padding_left=10 \
