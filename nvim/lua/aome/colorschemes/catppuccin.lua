@@ -13,6 +13,29 @@ catppuccin.setup {
 	},
 	styles = {
 		conditionals = {}
-	}
+	},
+    integrations = {
+        treesitter = true,
+        native_lsp = {
+            enable = true,
+            virtual_text = {
+                errors = { "italic" },
+                information  = { "italic" },
+                hints = { "italic" },
+                warnings = { "italic" }
+            },
+            underlines = {
+                errors = { "underline" },
+                information  = { "underline" },
+                hints = { "underline" },
+                warnings = { "underline" }
+            }
+        },
+        lsp_trouble = false,
+        cmp = true,
+        gitsigns = true,
+        telescope = true,
+        markdown = true
+    }
 }
 

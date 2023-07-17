@@ -4,8 +4,20 @@ if not ok then
     return
 end
 
+local actions = require "telescope.actions"
+
 telescope.setup {
     defaults = {
+        mappings = {
+            i = {
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-t>"] = actions.select_tab,
+            },
+            n = {
+                ["q"] = actions.close
+            }
+        },
         file_ignore_patterns = { ".git/", "node_modules" },
         layout_config = {
             prompt_position = "top"
@@ -14,7 +26,9 @@ telescope.setup {
         prompt_position = "top",
         prompt_prefix = " 󰍉 ",
         selection_caret = "  ",
-        sorting_strategy = "ascending"
+        sorting_strategy = "ascending",
+        winblend = 0,
+        set_env = { ["COLORTERM"] = "truecolor" }
     },
     pickers = {
         colorscheme = {

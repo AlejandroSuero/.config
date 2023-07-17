@@ -45,6 +45,8 @@ local options = {
         netrw_banner = false,
         netrw_browse_split = 0,
         netrw_winsize = 25,
+        netrw_list_hide = "node_modules",
+
         mapleader = " ",
         colorscheme = "catppuccin"
     }
