@@ -12,7 +12,7 @@ glow.setup {
 
 local mappings = {
     n = {
-        ["<leader>md"] = vim.cmd.Glow
+        ["<leader>md"] = function() vim.cmd("tab Glow") end
     }
 }
 
