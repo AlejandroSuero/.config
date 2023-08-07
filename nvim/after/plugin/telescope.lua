@@ -58,6 +58,7 @@ telescope.setup {
 }
 
 telescope.load_extension("harpoon")
+telescope.load_extension("noice")
 
 local builtin = require("telescope.builtin")
 

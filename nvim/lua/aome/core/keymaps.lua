@@ -1,4 +1,4 @@
-local plugins_path = "~/.config/nvim/lua/aome/packer.lua"
+local plugins_path = "~/.config/nvim/lua/aome/lazy.lua"
 
 local mappings = {
     i = { -- insert mode
