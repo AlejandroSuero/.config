@@ -12,10 +12,10 @@ local mappings = {
 		["<leader>a"] = mark.add_file,
 		["<C-e>"] = ui.toggle_quick_menu,
 		-- navigations
-		["<leader-1>"] = function() ui.nav_file(1) end,
-		["<leader-2>"] = function() ui.nav_file(2) end,
-		["<leader-3>"] = function() ui.nav_file(3) end,
-		["<leader-4>"] = function() ui.nav_file(4) end,
+		["<leader>1"] = function() ui.nav_file(1) end,
+		["<leader>2"] = function() ui.nav_file(2) end,
+		["<leader>3"] = function() ui.nav_file(3) end,
+		["<leader>4"] = function() ui.nav_file(4) end,
 	}
 }
 
