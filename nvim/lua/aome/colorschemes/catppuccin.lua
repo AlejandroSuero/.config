@@ -32,6 +32,7 @@ catppuccin.setup {
             }
         },
         noice = true,
+        notify = true,
         lsp_trouble = false,
         cmp = true,
         gitsigns = true,
