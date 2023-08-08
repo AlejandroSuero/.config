@@ -97,7 +97,7 @@ update_track() {
                      icon.color=$ICON_COLOR \
                      label.color=$ICON_COLOR \
                      background.color=$BG_COLOR \
-                     icon.padding_right=10 \
+                     icon.padding_right=$ICON_PADDING \
                      icon.padding_left=$ICON_PADDING \
                      label.drawing=$LABEL_DRAWING \
                      label.padding_right=$ICON_PADDING \
