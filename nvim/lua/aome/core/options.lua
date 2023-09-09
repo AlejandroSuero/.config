@@ -5,7 +5,7 @@ local options = {
         guicursor = "",
         guifont = "*",
 
-        cmdheight = 0,
+        cmdheight = 1,
 
         shell = env.SHELL,
 
