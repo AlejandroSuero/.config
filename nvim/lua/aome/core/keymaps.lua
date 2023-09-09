@@ -1,10 +1,10 @@
 local plugins_path = "~/.config/nvim/lua/aome/lazy.lua"
 
 local check_netrw = function()
-    local ok, _ = pcall(vim.cmd, "Ex")
+    local ok, _ = pcall(vim.cmd.Ex)
     if not ok then
-        vim.notify("netrw is disabled", 3)
-        return
+        vim.notify("netrw is disabled, using nvim-tree instead", 3)
+        vim.cmd.NvimTreeToggle()
     else
         vim.cmd.Ex()
     end
