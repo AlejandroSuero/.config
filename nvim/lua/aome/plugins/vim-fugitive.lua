@@ -8,8 +8,8 @@ return {
                     function()
                         vim.cmd("tab Git")
                     end,
-                    "Fugitive open git in new tab"
-                }
+                    "Fugitive open git in new tab",
+                },
             },
         }
 
@@ -52,8 +52,7 @@ return {
                     },
                 }
             end,
+            require("aome.core.utils").map_keys(mappings, opts),
         })
-
-        require("aome.core.utils").map_keys(mappings)
     end,
 }
