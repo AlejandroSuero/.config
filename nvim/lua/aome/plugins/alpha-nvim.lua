@@ -13,15 +13,16 @@ return {
             "                                        ",
             "                                        ",
             "                                        ",
-            "                青目                    ",
+            "                 青目                   ",
+            "                                        ",
             "   █████╗  ██████╗ ███╗   ███╗███████╗  ",
             "  ██╔══██╗██╔═══██╗████╗ ████║██╔════╝  ",
             "  ███████║██║   ██║██╔████╔██║█████╗    ",
             "  ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝    ",
             "  ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗  ",
             "  ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝  ",
-            "    󰝚 I'm Blue da ba dee da ba daa 󰝚    ",
             "                                        ",
+            "    󰝚 I'm Blue da ba dee da ba daa 󰝚    ",
             "                                        ",
             "                                        ",
             "                                        ",
@@ -38,7 +39,7 @@ return {
             ),
             dashboard.button(
                 "SPC pf",
-                "󰱼 > Find File",
+                "󰱼  > Find File",
                 "<cmd>Telescope find_files<CR>"
             ),
             dashboard.button(
@@ -46,7 +47,12 @@ return {
                 "  > Find Word",
                 "<cmd>Telescope live_grep<CR>"
             ),
-            dashboard.button("q", " > Quit NVIM", "<cmd>qa<CR>"),
+            dashboard.button(
+                "SPC epp",
+                "󱇧  > Edit lazy.lua",
+                "<cmd>e ~/.config/nvim/lua/aome/lazy.lua <CR>"
+            ),
+            dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
         }
 
         -- Send config to alpha
