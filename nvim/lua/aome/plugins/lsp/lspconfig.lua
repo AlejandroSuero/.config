@@ -112,17 +112,103 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
 
+        local servers = {
+            html = true,
+            tsserver = {
+                commands = {
+                    OrganizeImports = {
+                        organize_imports,
+                        description = "Organize Imports",
+                    },
+                },
+            },
+            astro = true,
+            rust_analyzer = true,
+            svelte = true,
+            tailwindcss = true,
+            cssls = true,
+            jsonls = true,
+            prismals = true,
+            graphql = true,
+            emmet_ls = {
+                filetypes = {
+                    "html",
+                    "typescriptreact",
+                    "javascriptreact",
+                    "css",
+                    "sass",
+                    "scss",
+                    "less",
+                    "svelte",
+                    "astro",
+                },
+            },
+            pyright = true,
+            lua_ls = {
+                settings = { -- custom settings for lua
+                    Lua = {
+                        -- make the language server recognize "vim" global
+                        diagnostics = {
+                            globals = { "vim", "require", "pcall", "string" },
+                        },
+                        workspace = {
+                            -- make language server aware of runtime files
+                            library = {
+                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                [vim.fn.stdpath("config") .. "/lua"] = true,
+                            },
+                            checkThirdParty = false,
+                        },
+                    },
+                },
+            },
+            gopls = {
+                root_dir = function(fname)
+                    local Path = require("plenary.path")
+
+                    local absolute_cwd = Path:new(vim.loop.cwd()):absolute()
+                    local absolute_fname = Path:new(fname):absolute()
+
+                    if
+                        string.find(absolute_cwd, "/cmd/", 1, true)
+                        and string.find(absolute_fname, absolute_cwd, 1, true)
+                    then
+                        return absolute_cwd
+                    end
+
+                    return require("lspconfig.util").root_pattern(
+                        "go.mod",
+                        ".git"
+                    )(fname)
+                end,
+
+                settings = {
+                    gopls = {
+                        codelenses = { test = true },
+                        hints = {
+                            assignVariableTypes = true,
+                            compositeLiteralFields = true,
+                            compositeLiteralTypes = true,
+                            constantValues = true,
+                            functionTypeParameters = true,
+                            parameterNames = true,
+                            rangeVariableTypes = true,
+                        } or nil,
+                    },
+                },
+            },
+        }
+
         -- configure html server
-        lspconfig["html"].setup({
+        lspconfig.html.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
 
         -- configure typescript server with plugin
-        lspconfig["tsserver"].setup({
+        lspconfig.tsserver.setup({
             capabilities = capabilities,
             on_attach = on_attach,
-            single_file_support = true,
             commands = {
                 OrganizeImports = {
                     organize_imports,
@@ -132,31 +218,31 @@ return {
         })
 
         -- configure css server
-        lspconfig["cssls"].setup({
+        lspconfig.cssls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
 
         -- configure tailwindcss server
-        lspconfig["tailwindcss"].setup({
+        lspconfig.tailwindcss.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
 
         -- configure svelte server
-        lspconfig["svelte"].setup({
+        lspconfig.svelte.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
 
         -- configure prisma orm server
-        lspconfig["prismals"].setup({
+        lspconfig.prismals.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
 
         -- configure graphql language server
-        lspconfig["graphql"].setup({
+        lspconfig.graphql.setup({
             capabilities = capabilities,
             on_attach = on_attach,
             filetypes = {
@@ -169,7 +255,7 @@ return {
         })
 
         -- configure emmet language server
-        lspconfig["emmet_ls"].setup({
+        lspconfig.emmet_ls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
             filetypes = {
@@ -181,17 +267,18 @@ return {
                 "scss",
                 "less",
                 "svelte",
+                "astro",
             },
         })
 
         -- configure python server
-        lspconfig["pyright"].setup({
+        lspconfig.pyright.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
 
         -- configure lua server (with special settings)
-        lspconfig["lua_ls"].setup({
+        lspconfig.lua_ls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
             settings = { -- custom settings for lua
@@ -210,5 +297,39 @@ return {
                 },
             },
         })
+
+        -- configure astro server
+        lspconfig.astro.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        -- configure rust server
+        lspconfig.rust_analyzer.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        ---Setup given server with given configuration, adding on_attach and
+        --capabilities to all by default
+        ---@param server string
+        ---@param config table|boolean|nil
+        local setup_server = function(server, config)
+            if not config then
+                return
+            end
+            if type(config) ~= "table" then
+                config = {}
+            end
+            config = vim.tbl_deep_extend("force", {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            }, config)
+            lspconfig[server].setup(config)
+        end
+
+        for server, config in pairs(servers) do
+            setup_server(server, config)
+        end
     end,
 }
