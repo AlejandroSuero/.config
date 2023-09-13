@@ -101,7 +101,26 @@ return {
         end
 
         -- used to enable autocompletion (assign to every lsp server config)
-        local capabilities = cmp_nvim_lsp.default_capabilities()
+        -- local capabilities = cmp_nvim_lsp.default_capabilities()
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+        capabilities.textDocument.completion.completionItem = {
+            documentationFormat = { "markdown", "plaintext" },
+            snippetSupport = true,
+            preselectSupport = true,
+            insertReplaceSupport = true,
+            labelDetailsSupport = true,
+            deprecatedSupport = true,
+            commitCharactersSupport = true,
+            tagSupport = { valueSet = { 1 } },
+            resolveSupport = {
+                properties = {
+                    "documentation",
+                    "detail",
+                    "additionalTextEdits",
+                },
+            },
+        }
 
         -- Change the Diagnostic symbols in the sign column (gutter)
         -- (not in youtube nvim video)
@@ -149,15 +168,19 @@ return {
                     Lua = {
                         -- make the language server recognize "vim" global
                         diagnostics = {
-                            globals = { "vim", "require", "pcall", "string" },
+                            globals = { "vim" },
                         },
                         workspace = {
                             -- make language server aware of runtime files
                             library = {
                                 [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                [vim.fn.stdpath("config") .. "/lua"] = true,
+                                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                                [vim.fn.stdpath("config") .. "lua/aome"] = true,
+                                [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
                             },
                             checkThirdParty = false,
+                            maxPreload = 100000,
+                            preloadFileSize = 10000,
                         },
                     },
                 },
@@ -198,117 +221,6 @@ return {
                 },
             },
         }
-
-        -- configure html server
-        lspconfig.html.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure typescript server with plugin
-        lspconfig.tsserver.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            commands = {
-                OrganizeImports = {
-                    organize_imports,
-                    description = "Organize Imports",
-                },
-            },
-        })
-
-        -- configure css server
-        lspconfig.cssls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure tailwindcss server
-        lspconfig.tailwindcss.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure svelte server
-        lspconfig.svelte.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure prisma orm server
-        lspconfig.prismals.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure graphql language server
-        lspconfig.graphql.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            filetypes = {
-                "graphql",
-                "gql",
-                "svelte",
-                "typescriptreact",
-                "javascriptreact",
-            },
-        })
-
-        -- configure emmet language server
-        lspconfig.emmet_ls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            filetypes = {
-                "html",
-                "typescriptreact",
-                "javascriptreact",
-                "css",
-                "sass",
-                "scss",
-                "less",
-                "svelte",
-                "astro",
-            },
-        })
-
-        -- configure python server
-        lspconfig.pyright.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure lua server (with special settings)
-        lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = { -- custom settings for lua
-                Lua = {
-                    -- make the language server recognize "vim" global
-                    diagnostics = {
-                        globals = { "vim", "require", "pcall", "string" },
-                    },
-                    workspace = {
-                        -- make language server aware of runtime files
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.stdpath("config") .. "/lua"] = true,
-                        },
-                    },
-                },
-            },
-        })
-
-        -- configure astro server
-        lspconfig.astro.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure rust server
-        lspconfig.rust_analyzer.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
 
         ---Setup given server with given configuration, adding on_attach and
         --capabilities to all by default

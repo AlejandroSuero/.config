@@ -1,7 +1,37 @@
+local colors = require("aome.colorschemes.catppuccin")
+local hlgroups = {
+    TelescopeNormal = { bg = colors.darker_black },
+    TelescopePromptTitle = {
+        fg = colors.black,
+        bg = colors.blue,
+    },
+    TelescopePreviewTitle = {
+        fg = colors.black,
+        bg = colors.green,
+    },
+    TelescopePreviewNormal = { fg = colors.white, bg = colors.black },
+    TelescopePreviewBorder = { fg = colors.black, bg = colors.black },
+    TelescopeSelection = { bg = colors.black2, fg = colors.white },
+    TelescopeResultsDiffAdd = { fg = colors.green },
+    TelescopeResultsDiffChange = { fg = colors.yellow },
+    TelescopeResultsDiffDelete = { fg = colors.red },
+    TelescopeBorder = { fg = colors.darker_black, bg = colors.darker_black },
+    TelescopePromptBorder = { fg = colors.black2, bg = colors.black2 },
+    TelescopePromptNormal = { fg = colors.white, bg = colors.black2 },
+    TelescopeResultsTitle = {
+        fg = colors.darker_black,
+        bg = colors.darker_black,
+    },
+    TelescopePromptPrefix = { fg = colors.red, bg = colors.black2 },
+}
+
 return {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons",
+    },
     event = "VeryLazy",
     config = function()
         local ok, telescope = pcall(require, "telescope")
@@ -26,6 +56,16 @@ return {
                 file_ignore_patterns = { ".git/", "node_modules" },
                 layout_config = {
                     prompt_position = "top",
+                    horizontal = {
+                        width_padding = 0.1,
+                        height_padding = 0.1,
+                        preview_width = 0.6,
+                    },
+                    vertical = {
+                        width_padding = 0.1,
+                        height_padding = 0.1,
+                        preview_height = 0.5,
+                    },
                 },
                 path_display = { "smart" },
                 prompt_position = "top",
@@ -34,6 +74,18 @@ return {
                 sorting_strategy = "ascending",
                 winblend = 0,
                 set_env = { ["COLORTERM"] = "truecolor" },
+                border = {},
+                borderchars = {
+                    "─",
+                    "│",
+                    "─",
+                    "│",
+                    "╭",
+                    "╮",
+                    "╯",
+                    "╰",
+                },
+                color_devicons = true,
             },
             pickers = {
                 colorscheme = {
@@ -61,6 +113,10 @@ return {
                 },
             },
         })
+
+        for group, color in pairs(hlgroups) do
+            vim.api.nvim_set_hl(0, group, color)
+        end
 
         telescope.load_extension("harpoon")
 

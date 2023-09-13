@@ -2,6 +2,7 @@ return {
     {
         "catppuccin/nvim",
         priority = 1000,
+        lazy = false,
         name = "catppuccin",
         config = function()
             local ok, catppuccin = pcall(require, "catppuccin")
@@ -37,15 +38,20 @@ return {
                             warnings = { "underline" },
                         },
                     },
+                    nvimtree = true,
                     noice = true,
                     notify = true,
                     lsp_trouble = false,
                     cmp = true,
                     gitsigns = true,
-                    telescope = true,
+                    telescope = {
+                        enabled = true,
+                        style = "nvchad"
+                    },
                     markdown = true,
                     mason = true,
                     harpoon = true,
+                    bufferline = true,
                 },
             })
             vim.cmd.colorscheme(vim.g.colorscheme)
@@ -67,4 +73,31 @@ return {
             vim.cmd.colorscheme(vim.g.colorscheme)
         end,
     },
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            style = "night",
+            light_style = "storm",
+            transparent = vim.g.transparency,
+            term_colors = true,
+            styles = {
+                comments = { italic = false },
+                keywords = { italic = false, bold = true },
+                sidebars = "dark",
+                floats = "dark"
+            },
+            sidebars = { "nvim-tree", "NvimTree" },
+            dim_inactive = true
+        },
+        config = function(_, opts)
+            local ok, tokyonight = pcall(require, "tokyonight")
+            if not ok then
+                vim.notify("COLORSCHEME: tokyonight not installed", 4)
+                return
+            end
+            tokyonight.setup(opts)
+        end
+    }
 }
