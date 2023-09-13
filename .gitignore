@@ -2,5 +2,6 @@ configstore
 com.corsair
 iterm2
 nvim/plugin
+nvim/lazy-lock.json
 tmux/plugins/*
 alacritty/themes
