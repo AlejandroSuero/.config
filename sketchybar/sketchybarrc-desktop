@@ -9,28 +9,41 @@ ITEMS_DIR="$HOME/.config/sketchybar/items"
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
 
-sketchybar --bar \
-    height=30 \
-    color=0xbb212232 \
-    margin=0 \
-    sticky=on \
-    padding_left=0 \
-    padding_right=0 \
-    notch_width=188 \
-    blur_radius=50 \
-    display=main
+# Setting up the general bar appearance of the bar
+bar=(
+    height=30
+    color=0xbb212232
+    shadow=on
+    position=top
+    sticky=on
+    padding_right=0
+    padding_left=0
+    corner_radius=10
+    y_offset=12
+    margin=12
+    blur_radius=20
+    notch_width=0
+)
 
-sketchybar --default \
-    background.height=32 \
-    icon.color=0xff24273a \
-    icon.font="$FONT_FACE:Medium:20.0" \
-    icon.padding_left=5 \
-    icon.padding_right=5 \
-    label.color=0xff24273a \
-    label.font="$FONT_FACE:Bold:14.0" \
-    label.y_offset=1 \
-    label.padding_left=0 \
+sketchybar --bar "${bar[@]}"
+
+# Setting up default values
+defaults=(
+    updates=when_shown
+    background.height=32
+    background.corner_radius=0
+    icon.color=0xff24273a
+    icon.font="$FONT_FACE:Medium:20.0"
+    icon.padding_left=5
+    icon.padding_right=5
+    label.color=0xff24273a
+    label.font="$FONT_FACE:Bold:14.0"
+    label.y_offset=1
+    label.padding_left=0
     label.padding_right=5
+)
+
+sketchybar --default "${defaults[@]}"
 
 source "$ITEMS_DIR/spaces.sh"
 
@@ -45,3 +58,5 @@ source "$ITEMS_DIR/spotify.sh"
 ##### Finalizing Setup #####
 sketchybar --update
 sketchybar --trigger space_change
+
+echo "sketchy bar configuration loaded..."
