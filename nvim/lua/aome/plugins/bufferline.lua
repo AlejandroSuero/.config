@@ -7,11 +7,16 @@ return {
         options = {
             mode = "buffers",
             separator_style = "thick",
-            always_show_bufferline = true,
+            always_show_bufferline = false,
             color_icons = true,
             offsets = {
                 {
                     filetype = "NvimTree",
+                    text = "",
+                    padding = 1,
+                },
+                {
+                    filetype = "Undotree",
                     text = "",
                     padding = 1,
                 },
