@@ -5,3 +5,7 @@ nvim/plugin
 nvim/lazy-lock.json
 tmux/plugins/*
 alacritty/themes
+gh
+gh-dash
+karabiner/automatic_backups
+htop
