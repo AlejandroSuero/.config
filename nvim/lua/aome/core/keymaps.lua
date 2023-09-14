@@ -100,17 +100,16 @@ local mappings = {
             end,
             "Closes current buffer",
         },
-        ["<C-f>"] = {
-            "<cmd>silent !tmux neww tmux-sessionizer<cr>",
-            "Opens a new tmux-sessionizer",
-        },
 
         ["<C-s>"] = { "<cmd>w<cr>", "Saves current file" },
         ["<C-S>"] = { "<cmd>wa<cr>", "Saves all files" },
     },
     v = { -- visual mode
         ["<leader>s"] = {
+<<<<<<< HEAD
             ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
+=======
+>>>>>>> parent of 7ca3cfc (feat(.config): Changed nvim and tmux config)
             function()
                 vim.cmd([[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
             end,

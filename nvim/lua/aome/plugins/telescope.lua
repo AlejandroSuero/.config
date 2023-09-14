@@ -31,7 +31,6 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     event = "VeryLazy",
     config = function()
@@ -120,7 +119,6 @@ return {
         end
 
         telescope.load_extension("harpoon")
-        telescope.load_extension("fzf")
 
         local builtin = require("telescope.builtin")
 
