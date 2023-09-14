@@ -100,15 +100,17 @@ local mappings = {
             end,
             "Closes current buffer",
         },
+        ["<C-f>"] = {
+            "<cmd>silent !tmux neww tmux-sessionizer<cr>",
+            "Opens a new tmux-sessionizer",
+        },
 
         ["<C-s>"] = { "<cmd>w<cr>", "Saves current file" },
         ["<C-S>"] = { "<cmd>wa<cr>", "Saves all files" },
     },
     v = { -- visual mode
         ["<leader>s"] = {
-            function()
-                vim.cmd([[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-            end,
+            ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
             "Replace selected",
         },
         ["J"] = { ":m '>+1<CR>gv=gv", "Moves code block up" },

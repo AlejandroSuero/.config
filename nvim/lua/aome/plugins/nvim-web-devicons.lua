@@ -8,6 +8,10 @@ return {
                 cterm_color = "199",
                 name = "GraphQL",
             },
+            lockb = {
+                icon = "🍙",
+                name = "BunLock",
+            },
         })
     end,
     lazy = true,
