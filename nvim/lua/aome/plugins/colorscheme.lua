@@ -52,10 +52,6 @@ return {
                     mason = true,
                     harpoon = true,
                     bufferline = true,
-                    telescope = true,
-                    markdown = true,
-                    mason = true,
-                    harpoon = true,
                 },
             })
             vim.cmd.colorscheme(vim.g.colorscheme)
@@ -64,7 +60,6 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        lazy = true,
         config = function()
             local ok, rosepine = pcall(require, "rose-pine")
             if not ok then

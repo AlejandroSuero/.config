@@ -11,7 +11,11 @@ return {
                 RRGGBBAA = true,
                 AARRGGBB = true,
                 tailwind = true,
-                names = false
+                rgb_fn   = false,
+                hsl_fn   = false,
+                css      = false,
+                css_fn   = false,
+                names    = false
             }
         })
     end

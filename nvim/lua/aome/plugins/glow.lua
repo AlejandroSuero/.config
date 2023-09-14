@@ -1,6 +1,7 @@
 return {
     "ellisonleao/glow.nvim",
     ft = "markdown",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
         local ok, glow = pcall(require, "glow")
         if not ok then

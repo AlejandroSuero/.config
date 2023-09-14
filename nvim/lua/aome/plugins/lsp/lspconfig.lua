@@ -181,9 +181,7 @@ return {
                             checkThirdParty = false,
                             maxPreload = 100000,
                             preloadFileSize = 10000,
-                            [vim.fn.stdpath("config") .. "/lua"] = true,
                         },
-                        checkThirdParty = false,
                     },
                 },
             },
@@ -206,8 +204,24 @@ return {
                         ".git"
                     )(fname)
                 end,
+
+                settings = {
+                    gopls = {
+                        codelenses = { test = true },
+                        hints = {
+                            assignVariableTypes = true,
+                            compositeLiteralFields = true,
+                            compositeLiteralTypes = true,
+                            constantValues = true,
+                            functionTypeParameters = true,
+                            parameterNames = true,
+                            rangeVariableTypes = true,
+                        } or nil,
+                    },
+                },
             },
         }
+
         ---Setup given server with given configuration, adding on_attach and
         --capabilities to all by default
         ---@param server string

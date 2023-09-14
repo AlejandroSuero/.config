@@ -106,12 +106,8 @@ local mappings = {
     },
     v = { -- visual mode
         ["<leader>s"] = {
-<<<<<<< HEAD
-            ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
-=======
->>>>>>> parent of 7ca3cfc (feat(.config): Changed nvim and tmux config)
             function()
-                vim.cmd([[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+                vim.cmd("w")
             end,
             "Replace selected",
         },
