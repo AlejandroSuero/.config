@@ -1,11 +1,8 @@
 return {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-<<<<<<< HEAD
     event = "User DirOpened",
     lazy = false,
-=======
->>>>>>> origin/main
     config = function()
         local ok, nvimtree = pcall(require, "nvim-tree")
         if not ok then
@@ -26,10 +23,7 @@ return {
             view = {
                 width = 40,
                 relativenumber = true,
-<<<<<<< HEAD
                 side = "right",
-=======
->>>>>>> origin/main
             },
             -- change folder arrow icons
             renderer = {
@@ -45,18 +39,10 @@ return {
                         git = {
                             unstaged = "✗",
                             staged = "✓",
-<<<<<<< HEAD
                             unmerged = "",
-                            renamed = "➜",
-                            untracked = "★",
-                            deleted = "",
-                            ignored = "◌",
-=======
-                            unmerged = "",
                             renamed = "➜",
                             untracked = "",
                             deleted = "󰗨",
->>>>>>> origin/main
                         },
                         symlink = "󱅸",
                     },
@@ -73,12 +59,8 @@ return {
                 },
             },
             filters = {
-<<<<<<< HEAD
                 exclude = { ".DS_Store", "node_modules" },
                 dotfiles = false,
-=======
-                custom = { ".DS_Store", "node_modules" },
->>>>>>> origin/main
             },
             git = {
                 ignore = false,

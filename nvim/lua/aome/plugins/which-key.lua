@@ -9,8 +9,5 @@ return {
     config = function(_, opts)
         require("which-key").setup(opts)
     end,
-<<<<<<< HEAD
     lazy = true,
-=======
->>>>>>> origin/main
 }

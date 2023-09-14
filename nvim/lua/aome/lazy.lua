@@ -20,7 +20,6 @@ local opts = {
         notify = false,
     },
     change_detection = {
-<<<<<<< HEAD
         notify = true,
     },
     defaults = {
@@ -45,9 +44,7 @@ local opts = {
                 "tohtml",
             },
         },
-=======
         notify = false,
->>>>>>> origin/main
     },
 }
 

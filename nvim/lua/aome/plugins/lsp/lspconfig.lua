@@ -101,7 +101,6 @@ return {
         end
 
         -- used to enable autocompletion (assign to every lsp server config)
-<<<<<<< HEAD
         -- local capabilities = cmp_nvim_lsp.default_capabilities()
         local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -122,9 +121,6 @@ return {
                 },
             },
         }
-=======
-        local capabilities = cmp_nvim_lsp.default_capabilities()
->>>>>>> origin/main
 
         -- Change the Diagnostic symbols in the sign column (gutter)
         -- (not in youtube nvim video)
@@ -172,17 +168,12 @@ return {
                     Lua = {
                         -- make the language server recognize "vim" global
                         diagnostics = {
-<<<<<<< HEAD
                             globals = { "vim" },
-=======
-                            globals = { "vim", "require", "pcall", "string" },
->>>>>>> origin/main
                         },
                         workspace = {
                             -- make language server aware of runtime files
                             library = {
                                 [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-<<<<<<< HEAD
                                 [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
                                 [vim.fn.stdpath("config") .. "lua/aome"] = true,
                                 [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
@@ -190,12 +181,9 @@ return {
                             checkThirdParty = false,
                             maxPreload = 100000,
                             preloadFileSize = 10000,
-=======
-                                [vim.fn.stdpath("config") .. "/lua"] = true,
-                            },
-                            checkThirdParty = false,
->>>>>>> origin/main
+                            [vim.fn.stdpath("config") .. "/lua"] = true,
                         },
+                        checkThirdParty = false,
                     },
                 },
             },
@@ -218,138 +206,8 @@ return {
                         ".git"
                     )(fname)
                 end,
-
-                settings = {
-                    gopls = {
-                        codelenses = { test = true },
-                        hints = {
-                            assignVariableTypes = true,
-                            compositeLiteralFields = true,
-                            compositeLiteralTypes = true,
-                            constantValues = true,
-                            functionTypeParameters = true,
-                            parameterNames = true,
-                            rangeVariableTypes = true,
-                        } or nil,
-                    },
-                },
             },
         }
-
-<<<<<<< HEAD
-=======
-        -- configure html server
-        lspconfig.html.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure typescript server with plugin
-        lspconfig.tsserver.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            commands = {
-                OrganizeImports = {
-                    organize_imports,
-                    description = "Organize Imports",
-                },
-            },
-        })
-
-        -- configure css server
-        lspconfig.cssls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure tailwindcss server
-        lspconfig.tailwindcss.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure svelte server
-        lspconfig.svelte.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure prisma orm server
-        lspconfig.prismals.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure graphql language server
-        lspconfig.graphql.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            filetypes = {
-                "graphql",
-                "gql",
-                "svelte",
-                "typescriptreact",
-                "javascriptreact",
-            },
-        })
-
-        -- configure emmet language server
-        lspconfig.emmet_ls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            filetypes = {
-                "html",
-                "typescriptreact",
-                "javascriptreact",
-                "css",
-                "sass",
-                "scss",
-                "less",
-                "svelte",
-                "astro",
-            },
-        })
-
-        -- configure python server
-        lspconfig.pyright.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure lua server (with special settings)
-        lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = { -- custom settings for lua
-                Lua = {
-                    -- make the language server recognize "vim" global
-                    diagnostics = {
-                        globals = { "vim", "require", "pcall", "string" },
-                    },
-                    workspace = {
-                        -- make language server aware of runtime files
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.stdpath("config") .. "/lua"] = true,
-                        },
-                    },
-                },
-            },
-        })
-
-        -- configure astro server
-        lspconfig.astro.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure rust server
-        lspconfig.rust_analyzer.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
->>>>>>> origin/main
         ---Setup given server with given configuration, adding on_attach and
         --capabilities to all by default
         ---@param server string

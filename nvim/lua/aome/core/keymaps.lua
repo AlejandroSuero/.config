@@ -70,7 +70,6 @@ local mappings = {
         },
 
         ["<leader>tx"] = { vim.cmd.tabclose, "Closes current tab" },
-<<<<<<< HEAD
         ["<leader>bx"] = {
             function()
                 if not vim.bo.modified then
@@ -105,21 +104,16 @@ local mappings = {
             "<cmd>silent !tmux neww tmux-sessionizer<cr>",
             "Opens a new tmux-sessionizer",
         },
-=======
->>>>>>> origin/main
 
         ["<C-s>"] = { "<cmd>w<cr>", "Saves current file" },
         ["<C-S>"] = { "<cmd>wa<cr>", "Saves all files" },
     },
     v = { -- visual mode
         ["<leader>s"] = {
-<<<<<<< HEAD
             ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
-=======
             function()
                 vim.cmd([[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
             end,
->>>>>>> origin/main
             "Replace selected",
         },
         ["J"] = { ":m '>+1<CR>gv=gv", "Moves code block up" },

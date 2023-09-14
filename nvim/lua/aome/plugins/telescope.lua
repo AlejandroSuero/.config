@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 local colors = require("aome.colorschemes.catppuccin")
 local hlgroups = {
     TelescopeNormal = { bg = colors.darker_black },
@@ -34,12 +33,6 @@ return {
         "nvim-tree/nvim-web-devicons",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
-=======
-return {
-    "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
->>>>>>> origin/main
     event = "VeryLazy",
     config = function()
         local ok, telescope = pcall(require, "telescope")
@@ -64,7 +57,6 @@ return {
                 file_ignore_patterns = { ".git/", "node_modules" },
                 layout_config = {
                     prompt_position = "top",
-<<<<<<< HEAD
                     horizontal = {
                         width_padding = 0.1,
                         height_padding = 0.1,
@@ -75,8 +67,6 @@ return {
                         height_padding = 0.1,
                         preview_height = 0.5,
                     },
-=======
->>>>>>> origin/main
                 },
                 path_display = { "smart" },
                 prompt_position = "top",
@@ -85,7 +75,6 @@ return {
                 sorting_strategy = "ascending",
                 winblend = 0,
                 set_env = { ["COLORTERM"] = "truecolor" },
-<<<<<<< HEAD
                 border = {},
                 borderchars = {
                     "─",
@@ -98,8 +87,6 @@ return {
                     "╰",
                 },
                 color_devicons = true,
-=======
->>>>>>> origin/main
             },
             pickers = {
                 colorscheme = {
@@ -128,16 +115,12 @@ return {
             },
         })
 
-<<<<<<< HEAD
         for group, color in pairs(hlgroups) do
             vim.api.nvim_set_hl(0, group, color)
         end
 
         telescope.load_extension("harpoon")
         telescope.load_extension("fzf")
-=======
-        telescope.load_extension("harpoon")
->>>>>>> origin/main
 
         local builtin = require("telescope.builtin")
 
