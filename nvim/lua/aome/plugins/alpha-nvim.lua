@@ -31,7 +31,11 @@ return {
 
         -- Set menu
         dashboard.section.buttons.val = {
+<<<<<<< HEAD
             dashboard.button("e", "  > New File", ":e "),
+=======
+            dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
+>>>>>>> origin/main
             dashboard.button(
                 "SPC ee",
                 "  > Toggle file explorer",

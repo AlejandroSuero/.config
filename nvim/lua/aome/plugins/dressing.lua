@@ -2,6 +2,7 @@ return {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
     opts = {
+<<<<<<< HEAD
         input = {
             title_pos = "center",
             win_options = {
@@ -17,4 +18,10 @@ return {
         end
         dressing.setup(opts)
     end
+=======
+        win_options = {
+            winblend = 0
+        }
+    },
+>>>>>>> origin/main
 }

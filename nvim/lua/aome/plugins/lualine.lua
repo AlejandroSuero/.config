@@ -35,7 +35,10 @@ end
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+<<<<<<< HEAD
     event = { "BufReadPre", "BufNewFile" },
+=======
+>>>>>>> origin/main
     config = function()
         local ok, lualine = pcall(require, "lualine")
         if not ok then

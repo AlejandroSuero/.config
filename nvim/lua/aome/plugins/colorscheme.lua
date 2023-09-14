@@ -2,7 +2,10 @@ return {
     {
         "catppuccin/nvim",
         priority = 1000,
+<<<<<<< HEAD
         lazy = false,
+=======
+>>>>>>> origin/main
         name = "catppuccin",
         config = function()
             local ok, catppuccin = pcall(require, "catppuccin")
@@ -38,12 +41,16 @@ return {
                             warnings = { "underline" },
                         },
                     },
+<<<<<<< HEAD
                     nvimtree = true,
+=======
+>>>>>>> origin/main
                     noice = true,
                     notify = true,
                     lsp_trouble = false,
                     cmp = true,
                     gitsigns = true,
+<<<<<<< HEAD
                     telescope = {
                         enabled = true,
                         style = "nvchad"
@@ -52,6 +59,12 @@ return {
                     mason = true,
                     harpoon = true,
                     bufferline = true,
+=======
+                    telescope = true,
+                    markdown = true,
+                    mason = true,
+                    harpoon = true,
+>>>>>>> origin/main
                 },
             })
             vim.cmd.colorscheme(vim.g.colorscheme)
@@ -73,6 +86,7 @@ return {
             vim.cmd.colorscheme(vim.g.colorscheme)
         end,
     },
+<<<<<<< HEAD
     {
         "folke/tokyonight.nvim",
         lazy = false,
@@ -100,4 +114,6 @@ return {
             tokyonight.setup(opts)
         end
     }
+=======
+>>>>>>> origin/main
 }

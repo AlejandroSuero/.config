@@ -2,6 +2,7 @@ return {
     "akinsho/bufferline.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     version = "*",
+<<<<<<< HEAD
     event = { "BufReadPre", "BufNewFile" },
     opts = {
         options = {
@@ -21,6 +22,14 @@ return {
                     padding = 1,
                 },
             },
+=======
+    opts = {
+        options = {
+            mode = "tabs",
+            separator_style = "thick",
+            always_show_bufferline = false,
+            color_icons = true,
+>>>>>>> origin/main
         },
     },
     config = function(_, opts)
