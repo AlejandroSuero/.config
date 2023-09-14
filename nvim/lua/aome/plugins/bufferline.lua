@@ -2,12 +2,25 @@ return {
     "akinsho/bufferline.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     version = "*",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
         options = {
-            mode = "tabs",
+            mode = "buffers",
             separator_style = "thick",
             always_show_bufferline = false,
             color_icons = true,
+            offsets = {
+                {
+                    filetype = "NvimTree",
+                    text = "",
+                    padding = 1,
+                },
+                {
+                    filetype = "Undotree",
+                    text = "",
+                    padding = 1,
+                },
+            },
         },
     },
     config = function(_, opts)

@@ -59,7 +59,7 @@ update_space() {
 
     sketchybar --set $NAME \
         icon=$ICON \
-        icon.font=$ICON_FONT
+        icon.font=$ICON_FONT \
         icon.padding_left=$ICON_PADDING_LEFT \
         icon.padding_right=$ICON_PADDING_RIGHT
 

@@ -70,6 +70,36 @@ local mappings = {
         },
 
         ["<leader>tx"] = { vim.cmd.tabclose, "Closes current tab" },
+        ["<leader>bx"] = {
+            function()
+                if not vim.bo.modified then
+                    vim.cmd("bdelete")
+                    return
+                end
+                local filename =
+                    vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+                vim.ui.select({ "Yes", "No", "Cancel" }, {
+                    prompt = string.format("Save changes on %s", filename),
+                }, function(choice)
+                    if choice == "Yes" then
+                        vim.cmd("w")
+                        vim.cmd("bdelete")
+                    elseif choice == "No" then
+                        vim.cmd("q!")
+                        vim.notify(
+                            string.format(
+                                "Changes in file %s not saved",
+                                filename
+                            ),
+                            3
+                        )
+                    else
+                        vim.notify("Action cancelled", 2)
+                    end
+                end)
+            end,
+            "Closes current buffer",
+        },
 
         ["<C-s>"] = { "<cmd>w<cr>", "Saves current file" },
         ["<C-S>"] = { "<cmd>wa<cr>", "Saves all files" },
@@ -77,7 +107,7 @@ local mappings = {
     v = { -- visual mode
         ["<leader>s"] = {
             function()
-                vim.cmd([[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+                vim.cmd("w")
             end,
             "Replace selected",
         },
