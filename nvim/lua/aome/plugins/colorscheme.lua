@@ -18,6 +18,10 @@ return {
                     enabled = true,
                     percentage = 0.5,
                 },
+                highliight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false,
+                },
                 styles = {
                     conditionals = {},
                 },
@@ -46,13 +50,23 @@ return {
                     gitsigns = true,
                     telescope = {
                         enabled = true,
-                        style = "nvchad"
+                        style = "nvchad",
                     },
                     markdown = true,
                     mason = true,
                     harpoon = true,
                     bufferline = true,
                 },
+                highlight_overrides = {
+                    all = function(_)
+                        local colors = require("aome.colorschemes.catppuccin")
+                        return {
+                            CursorLine = { bg = colors.darker_black },
+                            ColorColumn = { bg = colors.darker_black },
+                        }
+                    end,
+                },
+                compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
             })
             vim.cmd.colorscheme(vim.g.colorscheme)
         end,
@@ -85,10 +99,10 @@ return {
                 comments = { italic = false },
                 keywords = { italic = false, bold = true },
                 sidebars = "dark",
-                floats = "dark"
+                floats = "dark",
             },
             sidebars = { "nvim-tree", "NvimTree" },
-            dim_inactive = true
+            dim_inactive = true,
         },
         config = function(_, opts)
             local ok, tokyonight = pcall(require, "tokyonight")
@@ -97,6 +111,6 @@ return {
                 return
             end
             tokyonight.setup(opts)
-        end
-    }
+        end,
+    },
 }

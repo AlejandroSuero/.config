@@ -42,12 +42,16 @@ return {
             vim.notify("Lualine not loaded", 3)
             return
         end
+        local my_catppuccin = require("lualine.themes.catppuccin")
         local lazy_status = require("lazy.status")
+
+        my_catppuccin.normal.c.bg =
+            require("aome.colorschemes.catppuccin").darker_black
 
         lualine.setup({
             options = {
                 icons_enabled = true,
-                theme = "auto",
+                theme = my_catppuccin,
                 section_separators = { left = "", right = "" },
                 component_separators = { left = "", right = "" },
                 disabled_filetypes = {},
@@ -98,7 +102,7 @@ return {
                 lualine_z = {},
             },
             tabline = {},
-            extensions = { "fugitive" },
+            extensions = { "fugitive", "quickfix" },
         })
     end,
 }
