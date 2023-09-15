@@ -3,10 +3,6 @@ if not ok_catppuccin then
     vim.notify("Catppuccin colors not loaded", 3)
 end
 
-local hlgroups = {
-    NvimTreeNormal = { bg = colors.darker_black },
-}
-
 return {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -18,19 +14,30 @@ return {
             return
         end
 
+        local on_attach = function(bufnr)
+            local api = require("nvim-tree.api")
+            api.config.mappings.default_on_attach(bufnr)
+            local hlgroups = {
+                NvimTreeNormal = { bg = colors.darker_black },
+                NvimTreeIndentMarker = { fg = colors.blue },
+            }
+
+            for group, color in pairs(hlgroups) do
+                vim.api.nvim_set_hl(0, group, color)
+            end
+        end
+
         -- recommended settings from nvim-tree documentation
         -- disables netrw
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
 
-        -- change color for arrows in tree to light blue
-        vim.cmd([[ highlight NvimTreeIndentMarker guifg=#8BD5CA ]])
-
         -- configure nvim-tree
         nvimtree.setup({
+            on_attach = on_attach,
             view = {
                 width = 40,
-                relativenumber = true,
+                number = false,
                 side = "right",
             },
             -- change folder arrow icons
@@ -64,6 +71,7 @@ return {
                     window_picker = {
                         enable = false,
                     },
+                    quit_on_open = true,
                 },
             },
             filters = {
@@ -75,14 +83,13 @@ return {
             },
         })
 
-        for group, color in pairs(hlgroups) do
-            vim.api.nvim_set_hl(0, group, color)
-        end
-
         -- set keymaps
         local mappings = {
             n = {
-                ["<leader>ee"] = { vim.cmd.NvimTreeToggle, "NvimTree toggle" },
+                ["<leader>ee"] = {
+                    vim.cmd.NvimTreeToggle,
+                    "NvimTree toggle",
+                },
                 ["<leader>ef"] = {
                     vim.cmd.NvimTreeFocus,
                     "NvimTree focus",

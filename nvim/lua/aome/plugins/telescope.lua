@@ -53,7 +53,24 @@ return {
                         ["q"] = actions.close,
                     },
                 },
-                file_ignore_patterns = { ".git/", "node_modules" },
+                file_ignore_patterns = {
+                    "node_modules/",
+                    "%.git/",
+                    "%.DS_Store$",
+                    "target/",
+                    "build/",
+                    "%.o$",
+                },
+                vimgrep_arguments = {
+                    "rg",
+                    "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    "--smart-case",
+                    "--hidden",
+                },
                 layout_config = {
                     prompt_position = "top",
                     horizontal = {
@@ -112,6 +129,14 @@ return {
                     prompt_prefix = " 󰬶 ",
                 },
             },
+            extensions = {
+                fzf = {
+                    fuzzy = true, -- false will only do exact matching
+                    override_generic_sorter = true, -- override the generic sorter
+                    override_file_sorter = true, -- override the file sorter
+                    case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                },
+            },
         })
 
         for group, color in pairs(hlgroups) do
@@ -122,7 +147,6 @@ return {
 
         local builtin = require("telescope.builtin")
 
-        -- local opts = { noremap = true, silent = true }
         local mappings = {
             n = {
                 -- project files
