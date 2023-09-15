@@ -1,7 +1,15 @@
+local ok_catppuccin, colors = pcall(require, "aome.colorschemes.catppuccin")
+if not ok_catppuccin then
+    vim.notify("Catppuccin colors not loaded", 3)
+end
+
+local hlgroups = {
+    NvimTreeNormal = { bg = colors.darker_black },
+}
+
 return {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = "User DirOpened",
     lazy = false,
     config = function()
         local ok, nvimtree = pcall(require, "nvim-tree")
@@ -66,6 +74,10 @@ return {
                 ignore = false,
             },
         })
+
+        for group, color in pairs(hlgroups) do
+            vim.api.nvim_set_hl(0, group, color)
+        end
 
         -- set keymaps
         local mappings = {
