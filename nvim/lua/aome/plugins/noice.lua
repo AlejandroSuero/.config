@@ -90,7 +90,7 @@ return {
                 cmdline_popup = {
                     border = {
                         style = "none",
-                        padding = { 2, 3 },
+                        padding = { 2, 2 },
                     },
                     filter_options = {},
                     win_options = {
