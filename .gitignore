@@ -10,3 +10,5 @@ gh-dash
 karabiner/automatic_backups
 htop
 nvim/lazy-lock.json
+rest-client
+nodemon.json
