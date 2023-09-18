@@ -140,6 +140,11 @@ return {
                         description = "Organize Imports",
                     },
                 },
+                nit_options = {
+                    preferences = {
+                        disableSuggestions = true,
+                    },
+                },
             },
             astro = true,
             rust_analyzer = true,
