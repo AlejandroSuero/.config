@@ -19,6 +19,7 @@ return {
         on_open = function(win)
             local colorscheme = "rose-pine-main"
             vim.cmd.colorscheme(colorscheme)
+            vim.cmd.TransparentDisable()
         end,
         on_close = function()
             vim.cmd.colorscheme(vim.g.colorscheme)
@@ -40,7 +41,7 @@ return {
         map_keys(mappings)
     end,
     keys = {
-        "<leader>azm",
+        "<leader>zm",
         "<cmd>ZenMode<cr>",
         desc = "ZenMode",
     },
