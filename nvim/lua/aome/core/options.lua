@@ -51,7 +51,7 @@ local options = {
 
         mapleader = " ",
         colorscheme = "catppuccin",
-        transparency = false,
+        transparency = vim.g.transparent_enabled,
     },
 }
 
