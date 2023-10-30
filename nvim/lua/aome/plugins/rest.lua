@@ -1,6 +1,6 @@
 return {
     "rest-nvim/rest.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { "AlejandroSuero/plenary.nvim" },
     ft = "http",
     event = { "BufReadPre", "BufNewFile" },
     opts = {

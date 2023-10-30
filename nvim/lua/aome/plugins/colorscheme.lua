@@ -12,7 +12,7 @@ return {
             end
 
             catppuccin.setup({
-                transparent_background = true,
+                transparent_background = vim.g.transparency,
                 term_colors = true,
                 dim_inactive = {
                     enabled = true,
@@ -82,7 +82,7 @@ return {
             end
 
             rosepine.setup({
-                disable_background = true,
+                disable_background = vim.g.transparency,
             })
             vim.cmd.colorscheme(vim.g.colorscheme)
         end,
