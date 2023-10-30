@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-doc-name
 ---Returns the lsp client attach to the workspace
 ---@return string "  lsp_client" Lsp client in the format of "  lsp_client"
 local show_lsp = function()
@@ -36,6 +37,7 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = { "BufReadPre", "BufNewFile" },
+    lazy = true,
     config = function()
         local ok, lualine = pcall(require, "lualine")
         if not ok then
@@ -51,9 +53,9 @@ return {
         lualine.setup({
             options = {
                 icons_enabled = true,
-                theme = my_catppuccin,
+                theme = "rose-pine",
                 section_separators = { left = "", right = "" },
-                component_separators = { left = "", right = "" },
+                component_separators = { left = "/", right = "\\" },
                 disabled_filetypes = {},
             },
             sections = {

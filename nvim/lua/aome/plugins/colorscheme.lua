@@ -75,9 +75,13 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        lazy = true,
+        lazy = false,
         opts = {
+            variant = "moon",
+            dark_variant = "moon",
+            dim_nc_background = true,
             disable_background = vim.g.transparency,
+            disable_italics = true,
         },
         config = function(_, opts)
             local ok, rosepine = pcall(require, "rose-pine")
@@ -92,12 +96,12 @@ return {
     },
     {
         "folke/tokyonight.nvim",
-        lazy = true,
+        lazy = false,
         opts = {
-            style = "night",
+            style = "moon",
             light_style = "storm",
             transparent = vim.g.transparency,
-            term_colors = true,
+            terminal_colors = true,
             styles = {
                 comments = { italic = false },
                 keywords = { italic = false, bold = true },
