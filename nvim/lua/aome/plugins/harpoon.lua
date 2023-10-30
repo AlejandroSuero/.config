@@ -1,6 +1,6 @@
 return {
     "theprimeagen/harpoon",
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
         local ok, harpoon = pcall(require, "harpoon")
         if not ok then
@@ -11,7 +11,7 @@ return {
         local ui = require("harpoon.ui")
         local mappings = {
             n = {
-                ["<leader>a"] = {
+                ["<leader>A"] = {
                     mark.add_file,
                     "Harpoon adds file",
                 },
@@ -81,7 +81,7 @@ return {
 
         harpoon.setup({
             menu = {
-                width = (vim.api.nvim_win_get_width(0) / 2) + 10,
+                width = math.floor((vim.api.nvim_win_get_width(0) / 2) + 10),
                 height = 10,
             },
         })

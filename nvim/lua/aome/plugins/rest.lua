@@ -2,7 +2,7 @@ return {
     "rest-nvim/rest.nvim",
     dependencies = { "AlejandroSuero/plenary.nvim" },
     ft = "http",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPre *.http", "BufNewFile *.http" },
     opts = {
         -- Open request results in a horizontal split
         result_split_horizontal = false,
