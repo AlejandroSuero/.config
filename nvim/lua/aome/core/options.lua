@@ -51,7 +51,7 @@ local options = {
 
         mapleader = " ",
         colorscheme = "catppuccin",
-        transparency = true,
+        transparency = false,
     },
 }
 
