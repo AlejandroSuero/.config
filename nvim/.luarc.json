@@ -7,6 +7,9 @@
         "require",
         "string",
         "tostring",
-        "pairs"
+        "pairs",
+        "print",
+        "ipairs",
+        "type"
     ]
 }
