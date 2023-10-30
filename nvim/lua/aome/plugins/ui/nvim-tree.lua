@@ -18,13 +18,14 @@ return {
             local api = require("nvim-tree.api")
             api.config.mappings.default_on_attach(bufnr)
             local hlgroups = {
-                NvimTreeNormal = { bg = colors.darker_black },
+                NvimTreeNormal = { bg = colors.black },
                 NvimTreeIndentMarker = { fg = colors.blue },
             }
 
             for group, color in pairs(hlgroups) do
                 vim.api.nvim_set_hl(0, group, color)
             end
+            vim.opt.cursorline = true
         end
 
         -- recommended settings from nvim-tree documentation
@@ -48,8 +49,8 @@ return {
                 icons = {
                     glyphs = {
                         folder = {
-                            arrow_closed = "", -- arrow when folder is closed
-                            arrow_open = "", -- arrow when folder is open
+                            arrow_closed = "", -- arrow when folder is closed
+                            arrow_open = "", -- arrow when folder is open
                         },
                         git = {
                             unstaged = "✗",
@@ -75,7 +76,7 @@ return {
                 },
             },
             filters = {
-                exclude = { ".DS_Store", "node_modules" },
+                exclude = { ".DS_Store", "node_modules", ".git" },
                 dotfiles = false,
             },
             git = {

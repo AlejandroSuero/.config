@@ -20,7 +20,7 @@ local opts = {
         notify = false,
     },
     change_detection = {
-        notify = true,
+        notify = false,
     },
     defaults = {
         lazy = true,
@@ -28,7 +28,7 @@ local opts = {
     ui = {
         icons = {
             ft = "",
-            lazy = "󰂠 ",
+            lazy = "󰂠",
             loaded = "",
             not_loaded = "",
         },
@@ -53,7 +53,9 @@ if not ok then
     vim.notify("Lazy not loaded", 3)
     return
 end
-lazy.setup(
-    { { import = "aome.plugins" }, { import = "aome.plugins.lsp" } },
-    opts
-)
+lazy.setup({
+    { import = "aome.plugins" },
+    { import = "aome.plugins.lsp" },
+    { import = "aome.plugins.ui" },
+    { import = "aome.plugins.navigation" },
+}, opts)
