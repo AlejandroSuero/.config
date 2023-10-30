@@ -13,3 +13,4 @@ nvim/lazy-lock.json
 rest-client
 nodemon.json
 .DS_Store
+lazygit
