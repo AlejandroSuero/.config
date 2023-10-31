@@ -21,7 +21,7 @@ return {
             integrations = {
                 treesitter = true,
                 native_lsp = {
-                    enable = true,
+                    enable = false,
                     virtual_text = {
                         errors = { "italic" },
                         information = { "italic" },

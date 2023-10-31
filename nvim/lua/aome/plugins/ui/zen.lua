@@ -4,7 +4,7 @@ return {
     lazy = true,
     opts = {
         window = {
-            width = math.floor((vim.o.columns / 2) + 10),
+            width = math.floor((vim.o.columns / 2) + 20),
             backdrop = 0.50,
             options = {
                 cursorline = true,
