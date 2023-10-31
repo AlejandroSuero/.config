@@ -20,7 +20,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Open Google Chrom with HYPER + b",
+                                "description": "Open Google Chrome with HYPER + b",
                                 "from": {
                                     "key_code": "b",
                                     "modifiers": {
@@ -52,6 +52,24 @@
                                 },
                                 "to": {
                                     "shell_command": "open -n -a kitty.app"
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Restart yabai",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "option",
+                                            "shift",
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": {
+                                    "shell_command": "yabai --restart-service"
                                 },
                                 "type": "basic"
                             },
