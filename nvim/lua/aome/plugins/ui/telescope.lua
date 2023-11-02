@@ -1,30 +1,3 @@
-local colors = require("aome.colorschemes.catppuccin")
-local hlgroups = {
-    TelescopeNormal = { bg = colors.darker_black },
-    TelescopePromptTitle = {
-        fg = colors.black,
-        bg = colors.blue,
-    },
-    TelescopePreviewTitle = {
-        fg = colors.black,
-        bg = colors.green,
-    },
-    TelescopePreviewNormal = { fg = colors.white, bg = colors.black },
-    TelescopePreviewBorder = { fg = colors.black, bg = colors.black },
-    TelescopeSelection = { bg = colors.black2, fg = colors.white },
-    TelescopeResultsDiffAdd = { fg = colors.green },
-    TelescopeResultsDiffChange = { fg = colors.yellow },
-    TelescopeResultsDiffDelete = { fg = colors.red },
-    TelescopeBorder = { fg = colors.darker_black, bg = colors.darker_black },
-    TelescopePromptBorder = { fg = colors.black2, bg = colors.black2 },
-    TelescopePromptNormal = { fg = colors.white, bg = colors.black2 },
-    TelescopeResultsTitle = {
-        fg = colors.darker_black,
-        bg = colors.darker_black,
-    },
-    TelescopePromptPrefix = { fg = colors.red, bg = colors.black2 },
-}
-
 return {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
@@ -41,7 +14,9 @@ return {
         if not ok then
             vim.notify("Telescope not loaded", 3)
         end
+
         local actions = require("telescope.actions")
+
         telescope.setup({
             defaults = {
                 mappings = {
@@ -142,11 +117,8 @@ return {
             },
         })
 
-        for group, color in pairs(hlgroups) do
-            vim.api.nvim_set_hl(0, group, color)
-        end
-
         telescope.load_extension("harpoon")
+        telescope.load_extension("themes")
 
         local builtin = require("telescope.builtin")
 
@@ -164,7 +136,7 @@ return {
                 },
                 -- colorschemes
                 ["<leader>th"] = {
-                    builtin.colorscheme,
+                    "<cmd>Telescope themes<cr>",
                     "Telescope show colorschemes",
                 },
                 -- find string

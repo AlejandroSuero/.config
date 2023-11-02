@@ -1,8 +1,3 @@
-local ok_catppuccin, colors = pcall(require, "aome.colorschemes.catppuccin")
-if not ok_catppuccin then
-    vim.notify("Catppuccin colors not loaded", 3)
-end
-
 return {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -17,14 +12,6 @@ return {
         local on_attach = function(bufnr)
             local api = require("nvim-tree.api")
             api.config.mappings.default_on_attach(bufnr)
-            local hlgroups = {
-                NvimTreeNormal = { bg = colors.black },
-                NvimTreeIndentMarker = { fg = colors.blue },
-            }
-
-            for group, color in pairs(hlgroups) do
-                vim.api.nvim_set_hl(0, group, color)
-            end
             vim.opt.cursorline = true
         end
 

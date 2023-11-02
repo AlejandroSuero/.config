@@ -44,11 +44,7 @@ return {
             vim.notify("Lualine not loaded", 3)
             return
         end
-        local my_catppuccin = require("lualine.themes.catppuccin")
         local lazy_status = require("lazy.status")
-
-        my_catppuccin.normal.c.bg =
-            require("aome.colorschemes.catppuccin").darker_black
 
         lualine.setup({
             options = {

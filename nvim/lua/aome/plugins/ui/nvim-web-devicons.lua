@@ -1,4 +1,5 @@
-local colorscheme = require("aome.colorschemes." .. vim.g.colorscheme)
+local base46 = require("base46")
+local colorscheme = base46.get_colors("base46", vim.g.colorscheme)
 return {
     "nvim-tree/nvim-web-devicons",
     opts = {
