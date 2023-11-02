@@ -1,53 +1,17 @@
 return {
     "tpope/vim-fugitive",
     lazy = true,
-    config = function()
-        local aome_fugitive = vim.api.nvim_create_augroup("aome_fugitive", {})
-
-        local autocmd = vim.api.nvim_create_autocmd
-        autocmd("BufWinEnter", {
-            group = aome_fugitive,
-            pattern = "*",
-            callback = function()
-                if vim.bo.ft ~= "fugitive" then
-                    return
-                end
-
-                local bufnr = vim.api.nvim_get_current_buf()
-                local opts = { buffer = bufnr, remap = false }
-
-                local buffer_mappings = {
-                    n = {
-                        ["<leader>gcm"] = {
-                            function()
-                                vim.cmd.Git("commit")
-                            end,
-                            "Fugitve git commit",
-                        },
-                        ["<leader>gp"] = {
-                            function()
-                                vim.cmd.Git("push")
-                            end,
-                            "Fugitive git push",
-                        },
-                        ["<leader>P"] = {
-                            function()
-                                vim.cmd.Git({ "pull", "--rebase" })
-                            end,
-                            "Fugitive git pull and rebase",
-                        },
-                        ["<leader>t"] = {
-                            ":Git push -u origin ",
-                            "Fugitive git push origin <branch>",
-                        },
-                    },
-                }
-                require("aome.core.utils").map_keys(buffer_mappings, opts)
-            end,
-        })
-    end,
-    cmd = "Git",
+    cmd = { "G", "Git" },
     keys = {
         { "<leader>gs", "<cmd>tab Git<cr>", desc = "Git status" },
+        { "<leader>gcm", "<cmd>Git commit<cr>", desc = "Git commit" },
+        { "<leader>gf", "<cmd>Git fetch --all -p<cr>", desc = "Git fetch" },
+        { "<leader>gp", "<cmd>Git pull<cr>", desc = "Git pull" },
+        { "<leader>gP", "<cmd>Git push<cr>", desc = "Git push" },
+        {
+            "<leader>gu",
+            "<cmd>Git push origin ",
+            desc = "Git push origin <branch>",
+        },
     },
 }
