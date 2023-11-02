@@ -9,8 +9,8 @@ return {
         glow.setup({
             install_path = "~/.local/bin",
             style = "dark",
-            width = 120,
-            height = 150,
+            width = vim.o.columns,
+            height = vim.o.lines,
         })
     end,
     cmd = "Glow",
