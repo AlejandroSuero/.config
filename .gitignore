@@ -3,6 +3,7 @@ com.corsair
 iterm2
 nvim/plugin
 nvim/lazy-lock.json
+nvim/lua/aome/core/colorscheme.lua
 tmux/plugins/*
 alacritty/themes
 gh
