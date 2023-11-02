@@ -44,7 +44,7 @@ M.default_coloscheme_opts = {
 M.replace_word = function(old, new)
     local options = vim.fn.stdpath("config")
         .. "/lua/aome/core/"
-        .. "options.lua"
+        .. "colorscheme.lua"
     local file = io.open(options, "r")
     local added_pattern = string.gsub(old, "-", "%%-") -- add % before - if exists
     print("added_pattern: " .. added_pattern)

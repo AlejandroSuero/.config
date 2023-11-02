@@ -50,7 +50,6 @@ local options = {
         netrw_list_hide = "node_modules",
 
         mapleader = " ",
-        colorscheme = "vscode_dark",
         transparency = vim.g.transparent_enabled,
     },
 }
