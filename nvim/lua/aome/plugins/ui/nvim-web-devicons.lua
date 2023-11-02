@@ -28,6 +28,7 @@ return {
         css = {
             icon = "",
             name = "css",
+            color = colorscheme.blue,
         },
 
         dart = {
@@ -48,21 +49,31 @@ return {
         html = {
             icon = "",
             name = "html",
+            color = colorscheme.orange,
         },
 
         jpeg = {
             icon = "󰉏",
             name = "jpeg",
+            color = colorscheme.green,
         },
 
         jpg = {
             icon = "󰉏",
             name = "jpg",
+            color = colorscheme.green,
         },
 
         js = {
             icon = "󰌞",
             name = "js",
+            color = colorscheme.yellow,
+        },
+
+        jsx = {
+            icon = "󰌞",
+            name = "jsx",
+            color = colorscheme.yellow,
         },
 
         kt = {
@@ -84,11 +95,13 @@ return {
         mp3 = {
             icon = "󰎆",
             name = "mp3",
+            color = colorscheme.green,
         },
 
         mp4 = {
             icon = "",
             name = "mp4",
+            color = colorscheme.green,
         },
 
         out = {
@@ -99,6 +112,7 @@ return {
         png = {
             icon = "󰉏",
             name = "png",
+            color = colorscheme.green,
         },
 
         py = {
@@ -119,11 +133,12 @@ return {
         ts = {
             icon = "󰛦",
             name = "ts",
+            color = colorscheme.blue,
         },
 
         tsx = {
             icon = "󰜈",
-            color = colorscheme.blue,
+            color = colorscheme.nord_blue,
             name = "tsx",
         },
 
