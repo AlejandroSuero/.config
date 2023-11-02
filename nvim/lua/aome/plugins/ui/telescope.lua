@@ -32,7 +32,10 @@ return {
         "AlejandroSuero/plenary.nvim",
         "nvim-tree/nvim-web-devicons",
     },
-    event = "VeryLazy",
+    lazy = true,
+    cmd = {
+        "Telescope",
+    },
     config = function()
         local ok, telescope = pcall(require, "telescope")
         if not ok then

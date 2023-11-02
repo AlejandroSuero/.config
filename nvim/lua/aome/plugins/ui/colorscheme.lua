@@ -121,4 +121,9 @@ return {
             vim.cmd.colorscheme(vim.g.colorscheme)
         end,
     },
+    {
+        "wuelnerdotexe/vim-enfocado",
+        lazy = false,
+        config = true,
+    },
 }

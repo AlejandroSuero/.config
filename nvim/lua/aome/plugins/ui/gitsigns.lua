@@ -9,6 +9,8 @@ return {
             changedelete = { text = "~" },
             untracked = { text = "┆" },
         },
+        numhl = true,
+        max_file_length = 10000,
     },
     config = function(_, opts)
         local ok, gitsigns = pcall(require, "gitsigns")

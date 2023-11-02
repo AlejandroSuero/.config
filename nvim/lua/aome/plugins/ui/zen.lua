@@ -27,22 +27,10 @@ return {
     },
     config = function(_, opts)
         local zen_mode = require("zen-mode")
-        local map_keys = require("aome.core.utils").map_keys
         zen_mode.setup(opts)
-
-        local mappings = {
-            n = {
-                ["<leader>zz"] = {
-                    zen_mode.toggle,
-                    "Toggle ZenMode",
-                },
-            },
-        }
-        map_keys(mappings)
     end,
+    cmd = "ZenMode",
     keys = {
-        "<leader>zm",
-        "<cmd>ZenMode<cr>",
-        desc = "ZenMode",
+        { "<leader>zz", "<cmd>ZenMode<cr>", desc = "Enter zen mode" },
     },
 }

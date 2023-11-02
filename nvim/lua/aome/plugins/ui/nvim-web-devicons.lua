@@ -78,6 +78,7 @@ return {
         lua = {
             icon = "",
             name = "lua",
+            color = colorscheme.blue,
         },
 
         mp3 = {
@@ -169,5 +170,5 @@ return {
     config = function(_, opts)
         require("nvim-web-devicons").set_icon(opts)
     end,
-    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
 }
