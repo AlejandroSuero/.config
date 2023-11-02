@@ -1,19 +1,7 @@
 return {
     "tpope/vim-fugitive",
-    event = "VeryLazy",
-    lazy = false,
+    lazy = true,
     config = function()
-        local mappings = {
-            n = {
-                ["<leader>gs"] = {
-                    function()
-                        vim.cmd("tab Git")
-                    end,
-                    "Fugitive open git in new tab",
-                },
-            },
-        }
-
         local aome_fugitive = vim.api.nvim_create_augroup("aome_fugitive", {})
 
         local autocmd = vim.api.nvim_create_autocmd
@@ -56,7 +44,10 @@ return {
                 }
                 require("aome.core.utils").map_keys(buffer_mappings, opts)
             end,
-            require("aome.core.utils").map_keys(mappings),
         })
     end,
+    cmd = "Git",
+    keys = {
+        { "<leader>gs", "<cmd>tab Git<cr>", desc = "Git status" },
+    },
 }
