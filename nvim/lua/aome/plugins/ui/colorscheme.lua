@@ -124,6 +124,9 @@ return {
     {
         "wuelnerdotexe/vim-enfocado",
         lazy = false,
+        init = function()
+            vim.g.enfocado_style = "neon"
+        end,
         config = true,
     },
 }

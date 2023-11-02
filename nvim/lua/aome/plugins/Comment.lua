@@ -1,7 +1,11 @@
 return {
     "numToStr/Comment.nvim",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = true,
+    keys = {
+        { "gcc", desc = "Comment current line" },
+        { "gc", mode = "v", desc = "Comment selected text" },
+    },
     config = function()
         local ok, comment = pcall(require, "Comment")
         if not ok then

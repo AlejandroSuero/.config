@@ -1,6 +1,6 @@
 return {
     "xiyaowong/transparent.nvim",
-    lazy = true,
+    lazy = false,
     cmd = "TransparentToggle",
     config = true,
     keys = {
