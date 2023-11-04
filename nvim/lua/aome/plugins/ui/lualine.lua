@@ -22,14 +22,14 @@ end
 local get_date = function()
   local date = os.date("*t")
   local formatted_date = add_zero(date.day)
-      .. "-"
-      .. add_zero(date.month)
-      .. "-"
-      .. date.year
-      .. " | "
-      .. add_zero(date.hour)
-      .. ":"
-      .. add_zero(date.min)
+    .. "-"
+    .. add_zero(date.month)
+    .. "-"
+    .. date.year
+    .. " | "
+    .. add_zero(date.hour)
+    .. ":"
+    .. add_zero(date.min)
   return formatted_date
 end
 
@@ -49,7 +49,7 @@ return {
     lualine.setup({
       options = {
         icons_enabled = true,
-        theme = "auto",
+        theme = "catppuccin",
         section_separators = { left = "", right = "" },
         component_separators = { left = "/", right = "\\" },
         disabled_filetypes = {},
@@ -60,8 +60,8 @@ return {
         lualine_c = {
           {
             "filename",
-            file_status = true,             -- displays file status (readonly status, modified status)
-            path = 0,                       -- 0 = just filename, 1 = relative path, 2 = absolute path
+            file_status = true, -- displays file status (readonly status, modified status)
+            path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
           },
         },
         lualine_x = {
@@ -91,8 +91,8 @@ return {
         lualine_c = {
           {
             "filename",
-            file_status = true,             -- displays file status (readonly status, modified status)
-            path = 0,                       -- 0 = just filename, 1 = relative path, 2 = absolute path
+            file_status = true, -- displays file status (readonly status, modified status)
+            path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
           },
         },
         lualine_x = { get_date },
