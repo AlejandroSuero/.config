@@ -40,7 +40,6 @@ return {
     local action_state = require("telescope.actions.state")
 
     local reload_colorscheme = require("aome.core.utils").reload_colorscheme
-    local replace_word = require("aome.core.utils").replace_word
     local type = "colorscheme"
 
     telescope.setup({

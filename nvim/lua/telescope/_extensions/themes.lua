@@ -5,7 +5,6 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
-local replace_word = require("aome.core.utils").replace_word
 local reload_theme = require("aome.core.utils").reload_colorscheme
 local list_themes = require("aome.core.utils").list_themes
 local type = "base46"
