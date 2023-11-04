@@ -26,9 +26,9 @@ return {
       "<cmd>Telescope colorscheme<cr>",
       desc = "Change colorscheme",
     },
-    { "<leader>km", "<cmd>Telescope keymaps<cr>",   desc = "Show keymaps" },
+    { "<leader>km", "<cmd>Telescope keymaps<cr>", desc = "Show keymaps" },
     { "<leader>ht", "<cmd>Telescope help_tags<cr>", desc = "Show help tags" },
-    { "<leader>cm", "<cmd>Telescope commands<cr>",  desc = "Show commands" },
+    { "<leader>cm", "<cmd>Telescope commands<cr>", desc = "Show commands" },
   },
   config = function()
     local ok, telescope = pcall(require, "telescope")
@@ -117,7 +117,10 @@ return {
                 buffer = prompt_bufnr,
                 callback = function()
                   if action_state.get_selected_entry() then
-                    reload_colorscheme(action_state.get_selected_entry()[1], type)
+                    reload_colorscheme(
+                      action_state.get_selected_entry()[1],
+                      type
+                    )
                   end
                 end,
               })
@@ -149,7 +152,7 @@ return {
             end)
 
             map("i", "<C-k>", function()
-              actions.move_selection_next(prompt_bufnr)
+              actions.move_selection_previous(prompt_bufnr)
               reload_colorscheme(action_state.get_selected_entry()[1], type)
             end)
 
@@ -161,7 +164,7 @@ return {
               end
             end)
             return true
-          end
+          end,
         },
         find_files = {
           prompt_prefix = " 󰈔 ",
@@ -186,10 +189,10 @@ return {
       },
       extensions = {
         fzf = {
-          fuzzy = true,                   -- false will only do exact matching
+          fuzzy = true, -- false will only do exact matching
           override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true,    -- override the file sorter
-          case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+          override_file_sorter = true, -- override the file sorter
+          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
       },
     })

@@ -21,13 +21,8 @@ local function switcher()
       vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
 
       -- add syntax highlighting in previewer
-      local ft = (vim.filetype.match({ buf = bufnr }) or "diff"):match(
-        "%w+"
-      )
-      require("telescope.previewers.utils").highlighter(
-        self.state.bufnr,
-        ft
-      )
+      local ft = (vim.filetype.match({ buf = bufnr }) or "diff"):match("%w+")
+      require("telescope.previewers.utils").highlighter(self.state.bufnr, ft)
 
       reload_theme(entry.value, type)
     end,
@@ -79,7 +74,7 @@ local function switcher()
       end)
 
       map("i", "<C-k>", function()
-        actions.move_selection_next(prompt_bufnr)
+        actions.move_selection_previous(prompt_bufnr)
         reload_theme(action_state.get_selected_entry()[1], type)
       end)
 
