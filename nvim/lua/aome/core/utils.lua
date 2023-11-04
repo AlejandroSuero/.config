@@ -8,14 +8,14 @@ local M = {}
 M.map_keys = function(mappings_table, mapping_opt)
   for mode, mappings in pairs(mappings_table) do
     local default_opts =
-        vim.tbl_deep_extend("force", { mode = mode }, mapping_opt or {})
+      vim.tbl_deep_extend("force", { mode = mode }, mapping_opt or {})
 
     for keybind, mapping_info in pairs(mappings) do
       if type(mapping_info) ~= "table" then
         mapping_info = { mapping_info }
       end
       local opts =
-          vim.tbl_deep_extend("force", default_opts, mapping_info.opts or {})
+        vim.tbl_deep_extend("force", default_opts, mapping_info.opts or {})
 
       mapping_info.opts, opts.mode = nil, nil
       opts.desc = mapping_info[2] or "No description added"
@@ -40,8 +40,8 @@ M.default_coloscheme_opts = {
 ---@param new string New colorscheme you want to change
 M.replace_word = function(old, new)
   local options = vim.fn.stdpath("config")
-      .. "/lua/aome/core/"
-      .. "colorscheme.lua"
+    .. "/lua/aome/core/"
+    .. "colorscheme.lua"
   local file = io.open(options, "r")
   local added_pattern = string.gsub(old, "-", "%%-") -- add % before - if exists
   if file then
@@ -58,14 +58,16 @@ M.list_themes = function()
   -- local default_themes = vim.fn.readdir(
   --   vim.fn.stdpath("data") .. "/lazy/base46.nvim/lua/base46/hl_themes"
   -- )
-  local default_themes = vim.fn.readdir(os.getenv("HOME") .. "/dev/nvim_plugins/base46.nvim/lua/base46/hl_themes")
+  local default_themes = vim.fn.readdir(
+    os.getenv("HOME") .. "/dev/nvim_plugins/base46.nvim/lua/base46/hl_themes"
+  )
 
   local custom_themes =
-      vim.loop.fs_stat(vim.fn.stdpath("config") .. "/lua/colorschemes")
+    vim.loop.fs_stat(vim.fn.stdpath("config") .. "/lua/colorschemes")
 
   if custom_themes and custom_themes.type == "directory" then
     local themes_tb =
-        vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/colorschemes")
+      vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/colorschemes")
     for _, value in ipairs(themes_tb) do
       default_themes[#default_themes + 1] = value
     end
@@ -82,8 +84,8 @@ end
 ---@param colorscheme string Name of the colorscheme you want to reload
 ---@param type "base46"|"colorscheme"
 M.reload_colorscheme = function(colorscheme, type)
-  local old_data = type .. ' = "' ..  vim.g[type] .. '"'
-  local new_data = type .. ' = "' ..  colorscheme .. '"'
+  local old_data = type .. ' = "' .. vim.g[type] .. '"'
+  local new_data = type .. ' = "' .. colorscheme .. '"'
   M.replace_word('theme = "' .. vim.g.theme .. '"', 'theme = "' .. type .. '"')
   vim.g.theme = type
   if vim.g.theme == "base46" then
@@ -101,14 +103,32 @@ M.reload_colorscheme = function(colorscheme, type)
 end
 
 M.toggle_transparency = function()
+  local hl = vim.api.nvim_set_hl
   local old_data = "transparency = " .. tostring(vim.g.transparency)
   local new_data = "transparency = " .. tostring(not vim.g.transparency)
   M.replace_word(old_data, new_data)
   vim.g.transparency = not vim.g.transparency
-  require("base46").load_theme({
-    theme = vim.g.base46,
-    transparency = vim.g.transparency
-  })
+  if vim.g.theme == "base46" then
+    require("base46").load_theme({
+      theme = vim.g.base46,
+      transparency = vim.g.transparency,
+    })
+  else
+    local ok, colors =
+      pcall(require, "aome.plugins.ui.colorschemes." .. vim.g.colorscheme)
+    if ok then
+      colors = colors.colors
+    else
+      colors = { bg = "#2b3339" }
+    end
+    if vim.g.transparency == true then
+      hl(0, "Normal", { bg = "NONE" })
+      hl(0, "NormalFloat", { bg = "NONE" })
+    else
+      hl(0, "Normal", { bg = colors.bg })
+      hl(0, "NormalFloat", { bg = colors.bg })
+    end
+  end
 end
 
 return M

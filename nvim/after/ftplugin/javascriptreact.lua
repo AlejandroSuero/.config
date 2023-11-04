@@ -1,14 +1,17 @@
 local options = {
-    bo = {
-        tabstop = 2,
-        softtabstop = 2,
-        shiftwidth = 2,
-        expandtab = true,
-    },
+  bo = {
+    tabstop = 2,
+    softtabstop = 2,
+    shiftwidth = 2,
+    expandtab = true,
+  },
+  g = {
+    lsp_semantic_tokens = true
+  }
 }
 
 for scope, opts in pairs(options) do
-    for opt, value in pairs(opts) do
-        vim[scope][opt] = value
-    end
+  for opt, value in pairs(opts) do
+    vim[scope][opt] = value
+  end
 end
