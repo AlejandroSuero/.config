@@ -44,6 +44,7 @@ return {
 
     telescope.setup({
       defaults = {
+        preview = true,
         mappings = {
           i = {
             ["<C-j>"] = actions.move_selection_next,
