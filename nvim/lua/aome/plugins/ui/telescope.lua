@@ -23,12 +23,12 @@ return {
     },
     {
       "<leader>cs",
-      "<cmd>Telescope colorschemes<cr>",
+      "<cmd>Telescope colorscheme<cr>",
       desc = "Change colorscheme",
     },
-    { "<leader>km", "<cmd>Telescope keymaps<cr>", desc = "Show keymaps" },
+    { "<leader>km", "<cmd>Telescope keymaps<cr>",   desc = "Show keymaps" },
     { "<leader>ht", "<cmd>Telescope help_tags<cr>", desc = "Show help tags" },
-    { "<leader>cm", "<cmd>Telescope commands<cr>", desc = "Show commands" },
+    { "<leader>cm", "<cmd>Telescope commands<cr>",  desc = "Show commands" },
   },
   config = function()
     local ok, telescope = pcall(require, "telescope")
@@ -37,6 +37,11 @@ return {
     end
 
     local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
+
+    local reload_colorscheme = require("aome.core.utils").reload_colorscheme
+    local replace_word = require("aome.core.utils").replace_word
+    local type = "colorscheme"
 
     telescope.setup({
       defaults = {
@@ -105,6 +110,58 @@ return {
       pickers = {
         colorscheme = {
           prompt_prefix = " 󰏘 ",
+          attach_mappings = function(prompt_bufnr, map)
+            -- reload theme while typing
+            vim.schedule(function()
+              vim.api.nvim_create_autocmd("TextChangedI", {
+                buffer = prompt_bufnr,
+                callback = function()
+                  if action_state.get_selected_entry() then
+                    reload_colorscheme(action_state.get_selected_entry()[1], type)
+                  end
+                end,
+              })
+            end)
+            -- reload theme on cycling
+            map("i", "<C-n>", function()
+              actions.move_selection_next(prompt_bufnr)
+              reload_colorscheme(action_state.get_selected_entry()[1], type)
+            end)
+
+            map("i", "<Down>", function()
+              actions.move_selection_next(prompt_bufnr)
+              reload_colorscheme(action_state.get_selected_entry()[1], type)
+            end)
+
+            map("i", "<C-j>", function()
+              actions.move_selection_next(prompt_bufnr)
+              reload_colorscheme(action_state.get_selected_entry()[1], type)
+            end)
+
+            map("i", "<C-p>", function()
+              actions.move_selection_previous(prompt_bufnr)
+              reload_colorscheme(action_state.get_selected_entry()[1], type)
+            end)
+
+            map("i", "<Up>", function()
+              actions.move_selection_previous(prompt_bufnr)
+              reload_colorscheme(action_state.get_selected_entry()[1], type)
+            end)
+
+            map("i", "<C-k>", function()
+              actions.move_selection_next(prompt_bufnr)
+              reload_colorscheme(action_state.get_selected_entry()[1], type)
+            end)
+
+            ------------ save theme to chadrc on enter ----------------
+            actions.select_default:replace(function()
+              if action_state.get_selected_entry() then
+                actions.close(prompt_bufnr)
+                reload_colorscheme(action_state.get_selected_entry()[1], type)
+              end
+            end)
+            return true
+          end
         },
         find_files = {
           prompt_prefix = " 󰈔 ",
@@ -129,10 +186,10 @@ return {
       },
       extensions = {
         fzf = {
-          fuzzy = true, -- false will only do exact matching
+          fuzzy = true,                   -- false will only do exact matching
           override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
-          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          override_file_sorter = true,    -- override the file sorter
+          case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
         },
       },
     })
