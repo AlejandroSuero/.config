@@ -1,4 +1,12 @@
-local reload_colorscheme = require("aome.core.utils").reload_colorscheme
+local load_colorscheme = function()
+  local colorscheme
+  if vim.g.theme == "base46" then
+    colorscheme = vim.g.base46
+  else
+    colorscheme = vim.g.colorscheme
+  end
+  require("aome.core.utils").reload_colorscheme(colorscheme)
+end
 
 return {
   "folke/zen-mode.nvim",
@@ -18,13 +26,10 @@ return {
       },
     },
     on_open = function(_)
-      require("base46").load_theme {
-        theme = "rosepine",
-        tranparency = false,
-      }
+      load_colorscheme()
     end,
     on_close = function()
-      require("aome.core.utils").reload_colorscheme(vim.g.colorscheme)
+      load_colorscheme()
     end,
   },
   config = function(_, opts)

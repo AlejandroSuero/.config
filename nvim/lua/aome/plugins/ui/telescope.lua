@@ -15,7 +15,7 @@ return {
       "<cmd>Telescope find_files<cr>",
       desc = "Find project files",
     },
-    { "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Find git files" },
+    { "<C-p>", "<cmd>Telescope git_files<cr>", desc = "Find git files" },
     {
       "<leader>th",
       "<cmd>Telescope themes<cr>",
@@ -36,13 +36,13 @@ return {
       vim.notify("Telescope not loaded", 3)
     end
 
-    local actions = require("telescope.actions")
-    local action_state = require("telescope.actions.state")
+    local actions = require "telescope.actions"
+    local action_state = require "telescope.actions.state"
 
     local reload_colorscheme = require("aome.core.utils").reload_colorscheme
-    local type = "colorscheme"
+    local type = vim.g.theme
 
-    telescope.setup({
+    telescope.setup {
       defaults = {
         preview = true,
         mappings = {
@@ -195,21 +195,21 @@ return {
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
       },
-    })
+    }
 
-    telescope.load_extension("harpoon")
-    telescope.load_extension("themes")
+    telescope.load_extension "harpoon"
+    telescope.load_extension "themes"
 
-    local builtin = require("telescope.builtin")
+    local builtin = require "telescope.builtin"
 
     local mappings = {
       n = {
         -- find string
         ["<leader>ps"] = {
           function()
-            builtin.grep_string({
-              search = vim.fn.input("Grep -> "),
-            })
+            builtin.grep_string {
+              search = vim.fn.input "Grep -> ",
+            }
           end,
           "Telescope grep string",
         },
