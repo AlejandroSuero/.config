@@ -7,7 +7,7 @@ local merge_tb = vim.tbl_deep_extend
 M.load_config = function()
   local config = require "aome.core.default_config"
   local aomerc_path =
-      vim.api.nvim_get_runtime_file("lua/aome/core/aomerc.lua", false)[1]
+    vim.api.nvim_get_runtime_file("lua/aome/core/aomerc.lua", false)[1]
 
   if aomerc_path then
     local aomerc = dofile(aomerc_path)
@@ -66,7 +66,7 @@ M.load_mappings = function(section, mapping_opt)
 
       for mode, mode_values in pairs(section_values) do
         local default_opts =
-            merge_tb("force", { mode = mode }, mapping_opt or {})
+          merge_tb("force", { mode = mode }, mapping_opt or {})
         for keybind, mapping_info in pairs(mode_values) do
           -- merge default + user opts
           local opts = merge_tb("force", default_opts, mapping_info.opts or {})
@@ -126,14 +126,14 @@ end
 M.map_keys = function(mappings_table, mapping_opt)
   for mode, mappings in pairs(mappings_table) do
     local default_opts =
-        vim.tbl_deep_extend("force", { mode = mode }, mapping_opt or {})
+      vim.tbl_deep_extend("force", { mode = mode }, mapping_opt or {})
 
     for keybind, mapping_info in pairs(mappings) do
       if type(mapping_info) ~= "table" then
         mapping_info = { mapping_info }
       end
       local opts =
-          vim.tbl_deep_extend("force", default_opts, mapping_info.opts or {})
+        vim.tbl_deep_extend("force", default_opts, mapping_info.opts or {})
 
       mapping_info.opts, opts.mode = nil, nil
       opts.desc = mapping_info[2] or "No description added"
@@ -149,7 +149,7 @@ end
 ---@field transparency boolean
 M.default_coloscheme_opts = {
   base = "base46",
-  theme = vim.g.colorscheme,
+  theme = vim.g.base46,
   transparency = vim.g.transparency,
 }
 
@@ -158,19 +158,15 @@ M.default_coloscheme_opts = {
 ---@param new string New colorscheme you want to change
 M.replace_word = function(old, new)
   local options = vim.fn.stdpath "config"
-      .. "/lua/aome/core/"
-      .. "colorscheme.lua"
+    .. "/lua/aome/core/"
+    .. "colorscheme.lua"
   local file = io.open(options, "r")
   local added_pattern = string.gsub(old, "-", "%%-") -- add % before - if exists
-  print("added_pattern: " .. added_pattern)
-  print("new: " .. new)
-  print("old: " .. old)
   if file == nil then
     vim.notify("Config file not found", vim.log.levels.ERROR)
     return
   end
   local new_content = file:read("*all"):gsub(added_pattern, new)
-  print("new_content: " .. new_content)
 
   file = io.open(options, "w")
   file:write(new_content)
@@ -185,11 +181,11 @@ M.list_themes = function()
   )
 
   local custom_themes =
-      vim.loop.fs_stat(vim.fn.stdpath "config" .. "/lua/aome/colorschemes")
+    vim.uv.fs_stat(vim.fn.stdpath "config" .. "/lua/aome/colorschemes")
 
   if custom_themes and custom_themes.type == "directory" then
     local themes_tb =
-        vim.fn.readdir(vim.fn.stdpath "config" .. "/lua/aome/colorschemes")
+      vim.fn.readdir(vim.fn.stdpath "config" .. "/lua/aome/colorschemes")
     for _, value in ipairs(themes_tb) do
       default_themes[#default_themes + 1] = value
     end
@@ -202,14 +198,79 @@ M.list_themes = function()
   return default_themes
 end
 
+---Splits the inputs string by the separator
+---@param input string
+---@param separator string|nil
+---@return string[] t splitted from the separator
+local split = function(input, separator)
+  if separator == nil then
+    separator = "%s"
+  end
+  local t = {}
+  for str in string.gmatch(input, "([^" .. separator .. "]+)") do
+    table.insert(t, str)
+  end
+  return t
+end
+
+--- Checks if colorscheme can be turned into base46 theme
+---@param colorscheme string Name of the colorscheme
+local check_base46 = function(colorscheme)
+  local themes = M.list_themes()
+  local arr_colorscheme = split(colorscheme, "-")
+  local colorscheme_concat = ""
+  for _, str in pairs(arr_colorscheme) do
+    colorscheme_concat = colorscheme_concat .. str
+  end
+  colorscheme = colorscheme_concat
+
+  for _, theme in pairs(themes) do
+    if colorscheme:find(theme) then
+      return true
+    end
+  end
+  return false
+end
+
+---Converts from colorscheme to base46 naming
+---Ex: rose-pine -> rosepine
+---@param colorscheme string
+---@return string|nil theme if found in the base46, otherwise nil
+local colorscheme_to_base46 = function(colorscheme)
+  local themes = M.list_themes()
+  local arr_colorscheme = split(colorscheme, "-")
+  local colorscheme_concat = ""
+  for _, str in pairs(arr_colorscheme) do
+    colorscheme_concat = colorscheme_concat .. str
+  end
+  colorscheme = colorscheme_concat
+
+  for _, theme in pairs(themes) do
+    if colorscheme:find(theme) then
+      return theme
+    end
+  end
+  return nil
+end
+
 --- Reloads the selected colorscheme
 ---@param colorscheme string Name of the colorscheme you want to reload
 M.reload_colorscheme = function(colorscheme)
-  vim.g.colorscheme = colorscheme
-  require("base46").load_theme {
-    theme = colorscheme,
-    transparency = vim.g.transparency,
-  }
+  if vim.g.theme == "base46" then
+    if check_base46(colorscheme) then
+      colorscheme = colorscheme_to_base46(colorscheme) or vim.g.base46
+      M.replace_word(vim.g.base46, colorscheme)
+      vim.g.base46 = colorscheme
+      require("base46").load_theme {
+        theme = colorscheme,
+        transparency = vim.g.transparency,
+      }
+    else
+      vim.notify("Colorscheme is not a base46 theme", vim.log.levels.WARN)
+    end
+  else
+    vim.cmd.colorscheme(colorscheme)
+  end
 end
 
 return M

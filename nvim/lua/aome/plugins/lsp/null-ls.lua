@@ -35,6 +35,7 @@ return {
         formatting.gofumpt,
         formatting.goimports_reviser,
         formatting.golines,
+        formatting.clang_format,
       },
       -- configure format on save
       on_attach = function(current_client, bufnr)

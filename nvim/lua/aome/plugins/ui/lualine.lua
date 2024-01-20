@@ -20,7 +20,7 @@ local add_zero = function(number)
 end
 
 local get_date = function()
-  local date = os.date("*t")
+  local date = os.date "*t"
   local formatted_date = add_zero(date.day)
     .. "-"
     .. add_zero(date.month)
@@ -44,12 +44,12 @@ return {
       vim.notify("Lualine not loaded", 3)
       return
     end
-    local lazy_status = require("lazy.status")
+    local lazy_status = require "lazy.status"
 
-    lualine.setup({
+    lualine.setup {
       options = {
         icons_enabled = true,
-        theme = "catppuccin",
+        theme = "auto",
         section_separators = { left = "", right = "" },
         component_separators = { left = "/", right = "\\" },
         disabled_filetypes = {},
@@ -101,6 +101,6 @@ return {
       },
       tabline = {},
       extensions = { "fugitive", "quickfix" },
-    })
+    }
   end,
 }
