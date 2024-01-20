@@ -1,11 +1,7 @@
 return {
-    "jayden-chan/base46.nvim",
-    lazy = false,
-    config = function()
-        require("base46").load_theme({
-            theme = vim.g.colorscheme,
-            transparency = vim.g.transparency,
-        })
-    end,
-    priority = 1000,
+  "jayden-chan/base46.nvim",
+  lazy = false,
+  dir = os.getenv("HOME") .. "/dev/nvim_plugins/base46.nvim",
+  branch = "fix-transparent",
+  priority = 1000,
 }

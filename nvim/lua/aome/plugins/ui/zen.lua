@@ -1,4 +1,5 @@
----@diagnostic disable: undefined-global
+local reload_colorscheme = require("aome.core.utils").reload_colorscheme
+
 return {
   "folke/zen-mode.nvim",
   lazy = true,

@@ -1,64 +1,66 @@
 local env = vim.env
 
 local options = {
-    opt = { -- opt scope
-        guicursor = "",
-        guifont = "*",
+  opt = {   -- opt scope
+    guicursor = "",
+    guifont = "*",
 
-        cmdheight = 1,
+    background = "dark",
 
-        shell = env.SHELL,
+    cmdheight = 1,
 
-        number = true,
-        relativenumber = true,
+    shell = env.SHELL,
 
-        tabstop = 2,
-        softtabstop = 2,
-        shiftwidth = 2,
-        expandtab = true,
+    number = true,
+    relativenumber = true,
 
-        smartindent = true,
-        autoindent = true,
+    tabstop = 2,
+    softtabstop = 2,
+    shiftwidth = 2,
+    expandtab = true,
 
-        wrap = false,
+    smartindent = true,
+    autoindent = true,
 
-        swapfile = false,
-        backup = false,
-        undodir = os.getenv("HOME") .. "/.vim/undodir",
-        undofile = true,
+    wrap = false,
 
-        hlsearch = false,
-        incsearch = true,
+    swapfile = false,
+    backup = false,
+    undodir = os.getenv("HOME") .. "/.vim/undodir",
+    undofile = true,
 
-        termguicolors = true,
+    hlsearch = false,
+    incsearch = true,
 
-        scrolloff = 13,
-        signcolumn = "yes",
+    termguicolors = true,
 
-        winblend = 0,
+    scrolloff = 13,
+    signcolumn = "yes",
 
-        updatetime = 50,
+    winblend = 0,
 
-        colorcolumn = "80",
-        showmode = false,
-        cursorline = true,
-    },
-    g = { -- global scope
-        netrw_banner = false,
-        netrw_browse_split = 0,
-        netrw_winsize = 25,
-        netrw_list_hide = "node_modules",
+    updatetime = 50,
 
-        mapleader = " ",
-    },
+    colorcolumn = "80",
+    showmode = false,
+    cursorline = true,
+  },
+  g = {   -- global scope
+    netrw_banner = false,
+    netrw_browse_split = 0,
+    netrw_winsize = 25,
+    netrw_list_hide = "node_modules",
+
+    mapleader = " ",
+  },
 }
 
 local set_options = function(options_table)
-    for scope, opts in pairs(options_table) do
-        for opt, value in pairs(opts) do
-            vim[scope][opt] = value
-        end
+  for scope, opts in pairs(options_table) do
+    for opt, value in pairs(opts) do
+      vim[scope][opt] = value
     end
+  end
 end
 
 set_options(options)
