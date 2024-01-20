@@ -10,6 +10,7 @@
         "pairs",
         "print",
         "ipairs",
-        "type"
+        "type",
+        "dofile"
     ]
 }
