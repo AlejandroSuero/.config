@@ -77,7 +77,7 @@ local mappings = {
           return
         end
         local filename =
-            vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+          vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
         vim.ui.select({ "Yes", "No", "Cancel" }, {
           prompt = string.format("Save changes on %s", filename),
         }, function(choice)

@@ -8,7 +8,7 @@ M.ui = {
   changed_themes = {},
   theme_toggle = { "catppuccin", "aquarium" },
   theme = "catppuccin", -- default theme
-  transparency = true,
+  transparency = vim.g.transparency,
   lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 
   -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
