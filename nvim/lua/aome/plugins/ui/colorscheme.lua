@@ -32,4 +32,14 @@ return {
     priority = 1000,
     opts = require("aome.plugins.ui.colorschemes.solarized-osaka").options,
   },
+  {
+    "neanias/everforest-nvim",
+    version = false,
+    lazy = false,
+    priority = 1000,
+    opts = require("aome.plugins.ui.colorschemes.everforest").options,
+    config = function(_, opts)
+      require("everforest").setup(opts)
+    end,
+  },
 }
