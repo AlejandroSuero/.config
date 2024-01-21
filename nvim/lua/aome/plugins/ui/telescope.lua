@@ -39,8 +39,8 @@ return {
     local actions = require "telescope.actions"
     local action_state = require "telescope.actions.state"
 
-    local reload_colorscheme = require("aome.core.utils").reload_colorscheme
-    local type = vim.g.theme
+    -- local reload_colorscheme = require("aome.core.utils").reload_colorscheme
+    local replace = require("aome.core.utils").replace_word
 
     telescope.setup {
       defaults = {
@@ -117,7 +117,12 @@ return {
                 buffer = prompt_bufnr,
                 callback = function()
                   if action_state.get_selected_entry() then
-                    reload_colorscheme(action_state.get_selected_entry()[1])
+                    local colorscheme = action_state.get_selected_entry()[1]
+                    vim.cmd.colorscheme(colorscheme)
+                    local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
+                    local new_data = 'colorscheme = "' .. colorscheme .. '"'
+                    vim.g.colorscheme = colorscheme
+                    replace(old, new_data)
                   end
                 end,
               })
@@ -125,40 +130,79 @@ return {
             -- reload theme on cycling
             map("i", "<C-n>", function()
               actions.move_selection_next(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1])
+              local colorscheme = action_state.get_selected_entry()[1]
+              vim.cmd.colorscheme(colorscheme)
+              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
+              local new_data = 'colorscheme = "' .. colorscheme .. '"'
+              vim.g.colorscheme = colorscheme
+              replace(old, new_data)
             end)
 
             map("i", "<Down>", function()
               actions.move_selection_next(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1])
+              local colorscheme = action_state.get_selected_entry()[1]
+              vim.cmd.colorscheme(colorscheme)
+              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
+              local new_data = 'colorscheme = "' .. colorscheme .. '"'
+              vim.g.colorscheme = colorscheme
+              replace(old, new_data)
             end)
 
             map("i", "<C-j>", function()
               actions.move_selection_next(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1])
+              local colorscheme = action_state.get_selected_entry()[1]
+              vim.cmd.colorscheme(colorscheme)
+              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
+              local new_data = 'colorscheme = "' .. colorscheme .. '"'
+              vim.g.colorscheme = colorscheme
+              replace(old, new_data)
             end)
 
             map("i", "<C-p>", function()
               actions.move_selection_previous(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1])
+              local colorscheme = action_state.get_selected_entry()[1]
+              vim.cmd.colorscheme(colorscheme)
+              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
+              local new_data = 'colorscheme = "' .. colorscheme .. '"'
+              vim.g.colorscheme = colorscheme
+              replace(old, new_data)
             end)
 
             map("i", "<Up>", function()
               actions.move_selection_previous(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1])
+              local colorscheme = action_state.get_selected_entry()[1]
+              vim.cmd.colorscheme(colorscheme)
+              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
+              local new_data = 'colorscheme = "' .. colorscheme .. '"'
+              vim.g.colorscheme = colorscheme
+              replace(old, new_data)
             end)
 
             map("i", "<C-k>", function()
               actions.move_selection_previous(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1])
+              local colorscheme = action_state.get_selected_entry()[1]
+              vim.cmd.colorscheme(colorscheme)
+              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
+              local new_data = 'colorscheme = "' .. colorscheme .. '"'
+              vim.g.colorscheme = colorscheme
+              replace(old, new_data)
             end)
 
             ------------ save theme to chadrc on enter ----------------
             actions.select_default:replace(function()
               if action_state.get_selected_entry() then
                 actions.close(prompt_bufnr)
+                replace(
+                  'theme = "' .. vim.g.theme .. '"',
+                  'theme = "colorscheme"'
+                )
                 vim.g.theme = "colorscheme"
-                reload_colorscheme(action_state.get_selected_entry()[1])
+                local colorscheme = action_state.get_selected_entry()[1]
+                vim.cmd.colorscheme(colorscheme)
+                local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
+                local new_data = 'colorscheme = "' .. colorscheme .. '"'
+                vim.g.colorscheme = colorscheme
+                replace(old, new_data)
               end
             end)
             return true
