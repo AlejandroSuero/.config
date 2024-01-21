@@ -1,6 +1,6 @@
 return {
-  "AlejandroSuero/base46.nvim",
+  "AlejandroSuero/base46",
   lazy = false,
-  branch = "fix-transparent",
+  branch = "v2.0",
   priority = 1000,
 }

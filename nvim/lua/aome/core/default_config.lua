@@ -36,7 +36,7 @@ M.ui = {
 
 M.plugins = "" -- path i.e "custom.plugins", so make custom/plugins.lua file
 
-M.lazy_nvim = require "aome.plugins.lazy" -- config for lazy.nvim startup options
+M.lazy_nvim = require "aome.lazy" -- config for lazy.nvim startup options
 
 M.mappings = require "aome.core.keymaps"
 

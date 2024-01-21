@@ -117,10 +117,7 @@ return {
                 buffer = prompt_bufnr,
                 callback = function()
                   if action_state.get_selected_entry() then
-                    reload_colorscheme(
-                      action_state.get_selected_entry()[1],
-                      type
-                    )
+                    reload_colorscheme(action_state.get_selected_entry()[1])
                   end
                 end,
               })
@@ -128,39 +125,40 @@ return {
             -- reload theme on cycling
             map("i", "<C-n>", function()
               actions.move_selection_next(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1], type)
+              reload_colorscheme(action_state.get_selected_entry()[1])
             end)
 
             map("i", "<Down>", function()
               actions.move_selection_next(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1], type)
+              reload_colorscheme(action_state.get_selected_entry()[1])
             end)
 
             map("i", "<C-j>", function()
               actions.move_selection_next(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1], type)
+              reload_colorscheme(action_state.get_selected_entry()[1])
             end)
 
             map("i", "<C-p>", function()
               actions.move_selection_previous(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1], type)
+              reload_colorscheme(action_state.get_selected_entry()[1])
             end)
 
             map("i", "<Up>", function()
               actions.move_selection_previous(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1], type)
+              reload_colorscheme(action_state.get_selected_entry()[1])
             end)
 
             map("i", "<C-k>", function()
               actions.move_selection_previous(prompt_bufnr)
-              reload_colorscheme(action_state.get_selected_entry()[1], type)
+              reload_colorscheme(action_state.get_selected_entry()[1])
             end)
 
             ------------ save theme to chadrc on enter ----------------
             actions.select_default:replace(function()
               if action_state.get_selected_entry() then
                 actions.close(prompt_bufnr)
-                reload_colorscheme(action_state.get_selected_entry()[1], type)
+                vim.g.theme = "colorscheme"
+                reload_colorscheme(action_state.get_selected_entry()[1])
               end
             end)
             return true
