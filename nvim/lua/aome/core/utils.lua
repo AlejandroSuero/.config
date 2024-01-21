@@ -111,7 +111,7 @@ M.lazy_load = function(plugin)
             if plugin == "nvim-lspconfig" then
               vim.cmd "silent! do FileType"
             end
-          end, 0)
+          end)
         else
           require("lazy").load { plugins = plugin }
         end
@@ -169,8 +169,10 @@ M.replace_word = function(old, new)
   local new_content = file:read("*all"):gsub(added_pattern, new)
 
   file = io.open(options, "w")
-  file:write(new_content)
-  file:close()
+  if file then
+    file:write(new_content)
+    file:close()
+  end
 end
 
 --- List all the themes in the base46/hl_themes directory and self/colorscheme directory
