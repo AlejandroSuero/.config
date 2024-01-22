@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+gitmux -cfg $HOME/.config/tmux/gitmux.conf $(pwd)
+RESULT=$?
+
+if [ $RESULT -eq 0 ]; then
+  tmux set -g status-left "#[bg=#89b4fa,fg=#454759,bold] #S #[fg=#89b4fa,bg=#454759,bold] #[bg=#454759,fg=#89b4fa,nobold]#(gitmux -cfg $HOME/.config/tmux/gitmux.conf)"
+else
+  tmux set -g status-left "#[bg=#89b4fa,fg=#454759,bold] #S #[fg=#89b4fa,bg=default,bold]"
+fi
