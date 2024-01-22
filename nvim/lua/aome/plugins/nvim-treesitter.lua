@@ -49,6 +49,7 @@ return {
         "rust",
         "c",
         "astro",
+        "jsdoc",
       },
       auto_install = true,
     }

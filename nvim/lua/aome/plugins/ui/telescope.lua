@@ -2,7 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
-    "AlejandroSuero/plenary.nvim",
+    "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
   },
   lazy = true,
