@@ -7,6 +7,7 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     "JoosepAlviste/nvim-ts-context-commentstring",
   },
+  build = ":TSUpdate",
   config = function()
     local ok, treesitter = pcall(require, "nvim-treesitter.configs")
     if not ok then
