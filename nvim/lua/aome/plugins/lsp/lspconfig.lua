@@ -37,7 +37,7 @@ return {
     local opts = { noremap = true, silent = true }
 
     -- Function that runs when server is attached to buffer
-    ---@param _ table Client
+    ---@param client table Client
     ---@param bufnr integer Number of buffer
     local on_attach = function(client, bufnr)
       opts.buffer = bufnr
@@ -95,6 +95,12 @@ return {
           ["K"] = {
             vim.lsp.buf.hover,
             "LSP show documentation under cursor",
+          },
+        },
+        i = {
+          ["<C-h>"] = {
+            vim.lsp.buf.signature_help,
+            "LSP show signature",
           },
         },
       }
@@ -195,7 +201,7 @@ return {
         root_dir = function(fname)
           local Path = require "plenary.path"
 
-          local absolute_cwd = Path:new(vim.loop.cwd()):absolute()
+          local absolute_cwd = Path:new(vim.uv.cwd()):absolute()
           local absolute_fname = Path:new(fname):absolute()
 
           if

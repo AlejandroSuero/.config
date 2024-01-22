@@ -2,9 +2,9 @@
 ---Returns the lsp client attach to the workspace
 ---@return string " lsp_client" Lsp client in the format of " lsp_client"
 local show_lsp = function()
-  local lsp_client = vim.lsp.buf_get_clients()[1].config.name
+  local lsp_client = vim.lsp.get_clients()[1].config.name
   if lsp_client == "null-ls" then
-    lsp_client = vim.lsp.buf_get_clients()[2].config.name
+    lsp_client = vim.lsp.get_clients()[2].config.name
   end
   return string.format("%s %s", "", lsp_client)
 end
