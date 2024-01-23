@@ -2,11 +2,11 @@
 ---Returns the lsp client attach to the workspace
 ---@return string " lsp_client" Lsp client in the format of " lsp_client"
 local show_lsp = function()
-  local lsp_client = vim.lsp.get_clients()[1].config.name
+  local lsp_client = vim.lsp.get_active_clients()[1].config.name
   if lsp_client == "null-ls" then
-    lsp_client = vim.lsp.get_clients()[2].config.name
+    lsp_client = vim.lsp.get_active_clients()[2].config.name
   end
-  return string.format("%s %s", "", lsp_client)
+  return string.format("%s %s", " ", lsp_client)
 end
 
 ---Adds zero if the number is less than 10
@@ -33,6 +33,24 @@ local get_date = function()
   return formatted_date
 end
 
+---Gets the filename and if modified or not
+---@param reverse boolean
+---@return string filename_and_status - A modified or not status with the filename
+local get_filename_and_status = function(reverse)
+  local filename = vim.fn.expand "%:t"
+  local modified = vim.bo.modified
+  local file_status = " "
+  if modified then
+    file_status = " "
+  end
+
+  if reverse == true then
+    return string.format("%s %s", file_status, filename)
+  else
+    return string.format("%s %s", filename, file_status)
+  end
+end
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -42,6 +60,11 @@ return {
     local ok, lualine = pcall(require, "lualine")
     if not ok then
       vim.notify("Lualine not loaded", 3)
+      return
+    end
+    local ok_navic, navic = pcall(require, "nvim-navic")
+    if not ok_navic then
+      vim.notify("Navic not loaded", vim.log.levels.WARN)
       return
     end
     local lazy_status = require "lazy.status"
@@ -58,11 +81,9 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch" },
         lualine_c = {
-          {
-            "filename",
-            file_status = true, -- displays file status (readonly status, modified status)
-            path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
-          },
+          function()
+            return get_filename_and_status(false)
+          end,
         },
         lualine_x = {
           {
@@ -75,10 +96,7 @@ return {
               hint = "",
             },
           },
-          {
-            lazy_status.updates,
-            cond = lazy_status.has_updates,
-          },
+          { lazy_status.updates, cond = lazy_status.has_updates },
           { "encoding" },
           { "filetype" },
         },
@@ -89,17 +107,32 @@ return {
         lualine_a = {},
         lualine_b = {},
         lualine_c = {
-          {
-            "filename",
-            file_status = true, -- displays file status (readonly status, modified status)
-            path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-          },
+          function()
+            return get_filename_and_status(false)
+          end,
         },
         lualine_x = { get_date },
         lualine_y = {},
         lualine_z = {},
       },
       tabline = {},
+      winbar = {
+        lualine_c = {
+          {
+            function()
+              return navic.get_location()
+            end,
+            cond = function()
+              return navic.is_available()
+            end,
+          },
+        },
+        lualine_z = {
+          function()
+            return get_filename_and_status(true)
+          end,
+        },
+      },
       extensions = { "fugitive", "quickfix" },
     }
   end,

@@ -1,7 +1,7 @@
 local env = vim.env
 
 local options = {
-  opt = {   -- opt scope
+  opt = { -- opt scope
     guicursor = "",
     guifont = "*",
 
@@ -26,7 +26,7 @@ local options = {
 
     swapfile = false,
     backup = false,
-    undodir = os.getenv("HOME") .. "/.vim/undodir",
+    undodir = os.getenv "HOME" .. "/.vim/undodir",
     undofile = true,
 
     hlsearch = false,
@@ -45,7 +45,7 @@ local options = {
     showmode = false,
     cursorline = true,
   },
-  g = {   -- global scope
+  g = { -- global scope
     netrw_banner = false,
     netrw_browse_split = 0,
     netrw_winsize = 25,
@@ -65,11 +65,11 @@ end
 
 set_options(options)
 
-vim.opt.isfname:append("@-@")
+vim.opt.isfname:append "@-@"
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
 vim.env.PATH = vim.env.PATH
-    .. (is_windows and ";" or ":")
-    .. vim.fn.stdpath("data")
-    .. "/mason/bin"
+  .. (is_windows and ";" or ":")
+  .. vim.fn.stdpath "data"
+  .. "/mason/bin"

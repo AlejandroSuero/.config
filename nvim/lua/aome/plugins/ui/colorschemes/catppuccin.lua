@@ -1,14 +1,16 @@
 local M = {}
 
 M.options = {
+  flavour = "macchiato",
   transparent_background = vim.g.transparency,
   term_colors = vim.opt.termguicolors,
   dim_inactive = {
     enabled = true,
-    percentage = 0.30
+    shade = "dark",
+    percentage = 0.50,
   },
   styles = {
-    conditionals = {}
+    conditionals = {},
   },
   integrations = {
     cmp = true,
@@ -23,23 +25,23 @@ M.options = {
     harpoon = true,
     indent_blankline = {
       enabled = true,
-      scope_color = "lavender"
+      scope_color = "lavender",
     },
     native_lsp = {
-      enabled = vim.g.lsp_semantic_tokens,
+      enabled = true,
     },
-    semantic_tokens = vim.g.lsp_semantic_tokens,
+    semantic_tokens = true,
     leap = true,
     telescope = {
       enabled = true,
-      style = "nvchad"
+      style = "nvchad",
     },
-    which_key = true
-  }
+    which_key = true,
+  },
 }
 
 M.colors = {
-  bg = "#1E1D2D"
+  bg = "#1E1D2D",
 }
 
 return M

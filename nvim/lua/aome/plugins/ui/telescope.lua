@@ -29,6 +29,11 @@ return {
     { "<leader>km", "<cmd>Telescope keymaps<cr>", desc = "Show keymaps" },
     { "<leader>ht", "<cmd>Telescope help_tags<cr>", desc = "Show help tags" },
     { "<leader>cm", "<cmd>Telescope commands<cr>", desc = "Show commands" },
+    {
+      "<leader>pd",
+      "<cmd>Telescope diagnostics<cr>",
+      desc = "Show diagnostics",
+    },
   },
   config = function()
     local ok, telescope = pcall(require, "telescope")
@@ -227,6 +232,9 @@ return {
         },
         grep_string = {
           prompt_prefix = " 󰬶 ",
+        },
+        diagnostics = {
+          prompt_prefix = " 󱉦 ",
         },
       },
       extensions = {

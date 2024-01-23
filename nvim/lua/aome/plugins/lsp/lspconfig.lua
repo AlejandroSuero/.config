@@ -43,6 +43,12 @@ return {
       opts.buffer = bufnr
       client.server_capabilities.signatureHelpProvider =
         client.server_capabilities.signatureHelpProvider
+      local ok_navic, navic = pcall(require, "nvim-navic")
+      if ok_navic then
+        if client.server_capabilities.documentSymbolProvider then
+          navic.attach(client, bufnr)
+        end
+      end
 
       local mappings = {
         n = {
