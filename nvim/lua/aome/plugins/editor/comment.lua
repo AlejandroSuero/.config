@@ -7,11 +7,7 @@ return {
     { "gc", mode = "v", desc = "Comment selected text" },
   },
   config = function()
-    local ok, comment = pcall(require, "Comment")
-    if not ok then
-      vim.notify("Comment is not loaded", 3)
-      return
-    end
+    local comment = require "Comment"
     comment.setup {
       pre_hook = function(ctx)
         -- Only calculate commentstring for tsx filetypes

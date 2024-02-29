@@ -57,11 +57,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   lazy = true,
   config = function()
-    local ok, lualine = pcall(require, "lualine")
-    if not ok then
-      vim.notify("Lualine not loaded", 3)
-      return
-    end
+    local lualine = require "lualine"
     local lazy_status = require "lazy.status"
 
     lualine.setup {

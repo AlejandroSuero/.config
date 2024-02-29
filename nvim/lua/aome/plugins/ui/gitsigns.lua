@@ -13,11 +13,7 @@ return {
     max_file_length = 10000,
   },
   config = function(_, opts)
-    local ok, gitsigns = pcall(require, "gitsigns")
-    if not ok then
-      vim.notify("GitSigns not installed", 3)
-      return
-    end
+    local gitsigns = require "gitsigns"
     gitsigns.setup(opts)
   end,
   event = { "BufReadPre", "BufNewFile" },

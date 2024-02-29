@@ -22,11 +22,7 @@ return {
     },
   },
   config = function(_, opts)
-    local ok_blankline, blankline = pcall(require, "ibl")
-    if not ok_blankline then
-      vim.notify("Indent blankline not installed", 3)
-      return
-    end
+    local blankline = require "ibl"
     blankline.setup(opts)
   end,
 }

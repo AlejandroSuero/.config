@@ -15,18 +15,7 @@ return {
   },
   config = function()
     -- import lspconfig plugin
-    local ok, lspconfig = pcall(require, "lspconfig")
-    if not ok then
-      vim.notify("LspConfig is not loaded", 3)
-      return
-    end
-
-    -- import cmp-nvim-lsp plugin
-    local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    if not ok_cmp then
-      vim.notify("Cmp-nvim-lsp is not loaded", 3)
-      return
-    end
+    local lspconfig = require "lspconfig"
 
     local ok_builtin, telescope_builtin = pcall(require, "telescope.builtin")
     if not ok_builtin then
@@ -43,12 +32,6 @@ return {
       opts.buffer = bufnr
       client.server_capabilities.signatureHelpProvider =
         client.server_capabilities.signatureHelpProvider
-      local ok_navic, navic = pcall(require, "nvim-navic")
-      if ok_navic then
-        if client.server_capabilities.documentSymbolProvider then
-          navic.attach(client, bufnr)
-        end
-      end
 
       local mappings = {
         n = {

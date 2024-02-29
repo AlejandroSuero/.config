@@ -9,11 +9,7 @@ return {
   },
   build = ":TSUpdate",
   config = function()
-    local ok, treesitter = pcall(require, "nvim-treesitter.configs")
-    if not ok then
-      vim.notify("Treesitter not loaded", 3)
-      return
-    end
+    local treesitter = require "nvim-treesitter.configs"
 
     treesitter.setup {
       highlight = {
@@ -55,9 +51,9 @@ return {
       auto_install = true,
     }
 
-    local ok2, ts_context_commentstring =
+    local ok, ts_context_commentstring =
       pcall(require, "ts_context_commentstring")
-    if not ok2 then
+    if not ok then
       vim.notify("Tresitter context comment string not loaded", 3)
       return
     end
