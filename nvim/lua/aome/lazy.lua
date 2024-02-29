@@ -13,17 +13,17 @@ vim.opt.rtp:prepend(lazypath)
 
 local opts = {
   install = {
-    colorscheme = { "catppuccin" },
+    colorscheme = { vim.g.colorscheme },
   },
   checker = {
     enable = true,
-    notify = false,
   },
   change_detection = {
     notify = false,
   },
   defaults = {
     lazy = true,
+    version = false,
   },
   ui = {
     icons = {
@@ -35,16 +35,19 @@ local opts = {
   },
   performance = {
     rtp = {
-      disabled_plugins = {
-        "netrw",
-        "netrwPlugin",
-        "netrwSettings",
-        "netrwFileHandlers",
-        "2html_plugin",
-        "tohtml",
+      chache = {
+        enabled = true,
       },
+      disabled_plugins = {
+        "gzip",
+        "rplugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+      notify = false,
     },
-    notify = false,
   },
 }
 
@@ -54,8 +57,8 @@ if not ok then
   return
 end
 lazy.setup({
-  { import = "aome.plugins" },
-  { import = "aome.plugins.lsp" },
+  -- { import = "aome.plugins" },
   { import = "aome.plugins.ui" },
-  { import = "aome.plugins.navigation" },
+  { import = "aome.plugins.lsp" },
+  { import = "aome.plugins.editor" },
 }, opts)

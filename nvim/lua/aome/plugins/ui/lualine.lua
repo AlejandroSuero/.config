@@ -62,11 +62,6 @@ return {
       vim.notify("Lualine not loaded", 3)
       return
     end
-    local ok_navic, navic = pcall(require, "nvim-navic")
-    if not ok_navic then
-      vim.notify("Navic not loaded", vim.log.levels.WARN)
-      return
-    end
     local lazy_status = require "lazy.status"
 
     lualine.setup {
@@ -117,16 +112,6 @@ return {
       },
       tabline = {},
       winbar = {
-        lualine_c = {
-          {
-            function()
-              return navic.get_location()
-            end,
-            cond = function()
-              return navic.is_available()
-            end,
-          },
-        },
         lualine_z = {
           function()
             return get_filename_and_status(true)

@@ -20,6 +20,11 @@ local mappings = {
       "Open netrw Explorer",
     },
 
+    ["<leader>l"] = {
+      "<cmd>Lazy<CR>",
+      "[Lazy] Open",
+    },
+
     ["<leader>rs"] = {
       vim.cmd.LspRestart,
       "Restart LSP",

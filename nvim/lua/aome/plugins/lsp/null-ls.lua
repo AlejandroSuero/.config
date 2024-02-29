@@ -1,14 +1,12 @@
 return {
   "nvimtools/none-ls.nvim", -- configure formatters & linters
   event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    "nvimtools/none-ls-extras.nvim",
+  },
   config = function()
     -- import null-ls plugin
-    local ok, null_ls = pcall(require, "null-ls")
-    if not ok then
-      vim.notify("Null-ls is not loaded", 3)
-      return
-    end
-
+    local null_ls = require "null-ls"
     local null_ls_utils = require "null-ls.utils"
 
     -- for conciseness
@@ -30,8 +28,9 @@ return {
       -- setup formatters & linters
       sources = {
         formatting.stylua,
-        diagnostics.eslint,
-        formatting.eslint_d,
+        require "none-ls.formatting.eslint_d",
+        require "none-ls.diagnostics.eslint",
+        require "none-ls.code_actions.eslint",
         formatting.gofumpt,
         formatting.goimports_reviser,
         formatting.golines,

@@ -1,9 +1,7 @@
-local M = {}
-
-M.options = {
+return {
   flavour = "macchiato",
   transparent_background = vim.g.transparency,
-  term_colors = vim.opt.termguicolors,
+  term_colors = true,
   dim_inactive = {
     enabled = true,
     shade = "dark",
@@ -36,12 +34,5 @@ M.options = {
       enabled = true,
       style = "nvchad",
     },
-    which_key = true,
   },
 }
-
-M.colors = {
-  bg = "#1E1D2D",
-}
-
-return M

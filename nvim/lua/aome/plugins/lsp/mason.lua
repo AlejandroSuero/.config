@@ -44,14 +44,13 @@ return {
       "pyright",
       "gopls",
       "rust-analyzer",
-      "intelephense",
+      "phpactor",
       "astro-language-server",
       "json-lsp",
       "eslint-lsp",
       "marksman",
       "prettier", -- ts/js formatter
       "stylua", -- lua formatter
-      "eslint_d", -- ts/js linter
     },
     automatic_installation = true,
     max_concurrent_installers = 10,

@@ -4,6 +4,7 @@ iterm2
 nvim/plugin
 nvim/lazy-lock.json
 nvim/lua/aome/core/colorscheme.lua
+nvim/lua/aome/core/aomerc.lua
 tmux/plugins/*
 alacritty/themes
 gh

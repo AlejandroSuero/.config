@@ -153,6 +153,9 @@ return {
             description = "Organize Imports",
           },
         },
+        completions = {
+          completeFunctionCalls = true,
+        },
         nit_options = {
           preferences = {
             disableSuggestions = true,
@@ -160,7 +163,31 @@ return {
         },
       },
       astro = true,
-      rust_analyzer = true,
+      rust_analyzer = {
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = true,
+              loadOutDirsFromCheck = true,
+              runBuildScripts = true,
+            },
+            -- Add clippy lints for Rust.
+            checkOnSave = {
+              allFeatures = true,
+              command = "clippy",
+              extraArgs = { "--no-deps" },
+            },
+            procMacro = {
+              enable = true,
+              ignored = {
+                ["async-trait"] = { "async_trait" },
+                ["napi-derive"] = { "napi" },
+                ["async-recursion"] = { "async_recursion" },
+              },
+            },
+          },
+        },
+      },
       svelte = true,
       tailwindcss = true,
       cssls = true,
@@ -195,6 +222,9 @@ return {
                 [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
                 [vim.fn.stdpath "config" .. "lua/aome"] = true,
                 [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
+              },
+              completion = {
+                callSnippet = "Replace",
               },
               checkThirdParty = false,
               maxPreload = 100000,

@@ -13,38 +13,45 @@ return {
     {
       "<leader>pf",
       "<cmd>Telescope find_files<cr>",
-      desc = "Find project files",
+      desc = "[Telescope] Find project files",
     },
-    { "<C-p>", "<cmd>Telescope git_files<cr>", desc = "Find git files" },
     {
-      "<leader>th",
-      "<cmd>Telescope themes<cr>",
-      desc = "Change base46 colorscheme",
+      "<C-p>",
+      "<cmd>Telescope git_files<cr>",
+      desc = "[Telescope] Find git files",
     },
     {
       "<leader>cs",
       "<cmd>Telescope colorscheme<cr>",
-      desc = "Change colorscheme",
+      desc = "[Telescope] Change colorscheme",
     },
-    { "<leader>km", "<cmd>Telescope keymaps<cr>", desc = "Show keymaps" },
-    { "<leader>ht", "<cmd>Telescope help_tags<cr>", desc = "Show help tags" },
-    { "<leader>cm", "<cmd>Telescope commands<cr>", desc = "Show commands" },
+    {
+      "<leader>km",
+      "<cmd>Telescope keymaps<cr>",
+      desc = "[Telescope] Show keymaps",
+    },
+    {
+      "<leader>ht",
+      "<cmd>Telescope help_tags<cr>",
+      desc = "[Telescope] Show help tags",
+    },
+    {
+      "<leader>cm",
+      "<cmd>Telescope commands<cr>",
+      desc = "[Telescope] Show commands",
+    },
     {
       "<leader>pd",
       "<cmd>Telescope diagnostics<cr>",
-      desc = "Show diagnostics",
+      desc = "[Telescope] Show diagnostics",
     },
   },
   config = function()
-    local ok, telescope = pcall(require, "telescope")
-    if not ok then
-      vim.notify("Telescope not loaded", 3)
-    end
+    local telescope = require "telescope"
 
     local actions = require "telescope.actions"
     local action_state = require "telescope.actions.state"
 
-    -- local reload_colorscheme = require("aome.core.utils").reload_colorscheme
     local replace = require("aome.core.utils").replace_word
 
     telescope.setup {
@@ -193,15 +200,10 @@ return {
               replace(old, new_data)
             end)
 
-            ------------ save theme to chadrc on enter ----------------
+            ------------ save theme to aomerc on enter ----------------
             actions.select_default:replace(function()
               if action_state.get_selected_entry() then
                 actions.close(prompt_bufnr)
-                replace(
-                  'theme = "' .. vim.g.theme .. '"',
-                  'theme = "colorscheme"'
-                )
-                vim.g.theme = "colorscheme"
                 local colorscheme = action_state.get_selected_entry()[1]
                 vim.cmd.colorscheme(colorscheme)
                 local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
@@ -247,9 +249,6 @@ return {
       },
     }
 
-    telescope.load_extension "harpoon"
-    telescope.load_extension "themes"
-
     local builtin = require "telescope.builtin"
 
     local mappings = {
@@ -261,7 +260,7 @@ return {
               search = vim.fn.input "Grep -> ",
             }
           end,
-          "Telescope grep string",
+          "[Telescope] Grep string",
         },
       },
     }

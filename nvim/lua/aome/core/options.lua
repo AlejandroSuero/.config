@@ -44,6 +44,10 @@ local options = {
     colorcolumn = "80",
     showmode = false,
     cursorline = true,
+
+    listchars = {
+      trail = " ",
+    },
   },
   g = { -- global scope
     netrw_banner = false,
@@ -52,6 +56,7 @@ local options = {
     netrw_list_hide = "node_modules",
 
     mapleader = " ",
+    maplocalleader = ",",
   },
 }
 

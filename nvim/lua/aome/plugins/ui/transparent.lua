@@ -1,10 +1,18 @@
 return {
-    "xiyaowong/transparent.nvim",
-    lazy = false,
-    cmd = "TransparentToggle",
-    enabled = false,
-    config = true,
-    keys = {
-        { "<C-t>", vim.cmd.TransparentToggle, desc = "Toggle transparency" },
+  "xiyaowong/transparent.nvim",
+  cmd = "TransparentToggle",
+  config = true,
+  keys = {
+    {
+      "<C-t>",
+      function()
+        vim.cmd.TransparentToggle()
+        local old = "transparency = " .. tostring(vim.g.transparency)
+        local new = "transparency = " .. tostring(not vim.g.transparency)
+        require("aome.core.utils").replace_word(old, new)
+        vim.g.transparency = not vim.g.transparency
+      end,
+      desc = "Toggle transparency",
     },
+  },
 }
