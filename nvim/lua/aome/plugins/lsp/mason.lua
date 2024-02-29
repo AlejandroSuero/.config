@@ -44,7 +44,6 @@ return {
       "pyright",
       "gopls",
       "rust-analyzer",
-      "phpactor",
       "astro-language-server",
       "json-lsp",
       "eslint-lsp",
@@ -56,10 +55,16 @@ return {
     max_concurrent_installers = 10,
   },
   config = function(_, opts)
-    local ok, mason = pcall(require, "mason")
-    if not ok then
-      vim.notify("Mason is not loaded", 3)
-      return
+    local mason = require "mason"
+
+    if package.config:sub(1, 1) ~= "\\" then
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, {
+        "phpactor",
+      })
+    else
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, {
+        "intelephense",
+      })
     end
 
     mason.setup(opts)
