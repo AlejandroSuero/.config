@@ -21,7 +21,6 @@ M.load_config = function()
       )
     end
   else
-    vim.notify("aomerc.lua has been found", vim.log.levels.INFO)
     require "aome.core.aomerc"
   end
 end
