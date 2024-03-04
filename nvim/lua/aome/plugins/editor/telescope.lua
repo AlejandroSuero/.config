@@ -14,6 +14,9 @@ return {
       -- `cond` is a condition used to determine whether this plugin should be
       -- installed and loaded.
       cond = function()
+        if vim.fn.has "win32" == 1 then
+          return false
+        end
         return vim.fn.executable "make" == 1
       end,
     },
