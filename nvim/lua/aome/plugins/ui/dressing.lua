@@ -1,5 +1,12 @@
 return {
   "stevearc/dressing.nvim",
   event = { "BufReadPre", "BufNewFile" },
-  config = true,
+  opts = {
+    input = {
+      relative = "win",
+    },
+    select = {
+      backend = { "telescope", "builtin", "fzf_lua", "fzf", "nui" },
+    },
+  },
 }
