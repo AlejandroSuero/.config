@@ -9,6 +9,10 @@ local select = function()
       return item
     end,
   }, function(choice)
+    if choice == nil then
+      vim.notify("No choice selected", vim.log.levels.WARN)
+      return
+    end
     if choice == "Push -u" then
       local branch = vim.fn.input "Branch to push from -> "
       vim.cmd("Git push origin " .. branch)
@@ -20,7 +24,7 @@ local select = function()
   end)
 end
 
-local opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true, buffer = 0 }
 local mappings = {
   n = {
     ["<leader>go"] = {
