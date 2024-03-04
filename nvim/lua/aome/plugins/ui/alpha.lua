@@ -47,6 +47,13 @@ return {
       dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
     }
 
+    dashboard.section.footer.val = {
+      " ",
+      " ",
+      " ",
+      "NVIM version v" .. vim.version().minor .. "." .. vim.version().patch,
+    }
+
     -- Send config to alpha
     alpha.setup(dashboard.opts)
 
