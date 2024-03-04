@@ -147,7 +147,7 @@ return {
     end
 
     local servers = {
-      html = true,
+      html = {},
       tsserver = {
         commands = {
           OrganizeImports = {
@@ -164,7 +164,7 @@ return {
           },
         },
       },
-      astro = true,
+      astro = {},
       rust_analyzer = {
         settings = {
           ["rust-analyzer"] = {
@@ -190,12 +190,12 @@ return {
           },
         },
       },
-      svelte = true,
-      tailwindcss = true,
-      cssls = true,
-      jsonls = true,
-      prismals = true,
-      graphql = true,
+      svelte = {},
+      tailwindcss = {},
+      cssls = {},
+      jsonls = {},
+      prismals = {},
+      graphql = {},
       emmet_ls = {
         filetypes = {
           "html",
@@ -209,7 +209,7 @@ return {
           "astro",
         },
       },
-      pyright = true,
+      pyright = {},
       lua_ls = {
         settings = { -- custom settings for lua
           Lua = {
