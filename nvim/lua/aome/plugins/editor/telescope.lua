@@ -4,6 +4,19 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
+    { -- If encountering errors, see telescope-fzf-native README for install instructions
+      "nvim-telescope/telescope-fzf-native.nvim",
+
+      -- `build` is used to run some command when the plugin is installed/updated.
+      -- This is only run then, not every time Neovim starts up.
+      build = "make",
+
+      -- `cond` is a condition used to determine whether this plugin should be
+      -- installed and loaded.
+      cond = function()
+        return vim.fn.executable "make" == 1
+      end,
+    },
   },
   lazy = true,
   cmd = {
@@ -53,6 +66,8 @@ return {
     local action_state = require "telescope.actions.state"
 
     local replace = require("aome.core.utils").replace_word
+
+    pcall(require("telescope").load_extension, "fzf")
 
     telescope.setup {
       defaults = {
@@ -139,65 +154,53 @@ return {
                 end,
               })
             end)
-            -- reload theme on cycling
-            map("i", "<C-n>", function()
-              actions.move_selection_next(prompt_bufnr)
+            local replace_colorscheme = function()
               local colorscheme = action_state.get_selected_entry()[1]
               vim.cmd.colorscheme(colorscheme)
               local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
               local new_data = 'colorscheme = "' .. colorscheme .. '"'
               vim.g.colorscheme = colorscheme
               replace(old, new_data)
+            end
+            -- -- reload theme on cycling
+            map("i", "<C-n>", function()
+              actions.move_selection_next(prompt_bufnr)
+              replace_colorscheme()
             end)
 
             map("i", "<Down>", function()
               actions.move_selection_next(prompt_bufnr)
-              local colorscheme = action_state.get_selected_entry()[1]
-              vim.cmd.colorscheme(colorscheme)
-              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
-              local new_data = 'colorscheme = "' .. colorscheme .. '"'
-              vim.g.colorscheme = colorscheme
-              replace(old, new_data)
+              replace_colorscheme()
             end)
 
             map("i", "<C-j>", function()
               actions.move_selection_next(prompt_bufnr)
-              local colorscheme = action_state.get_selected_entry()[1]
-              vim.cmd.colorscheme(colorscheme)
-              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
-              local new_data = 'colorscheme = "' .. colorscheme .. '"'
-              vim.g.colorscheme = colorscheme
-              replace(old, new_data)
+              replace_colorscheme()
             end)
 
             map("i", "<C-p>", function()
               actions.move_selection_previous(prompt_bufnr)
-              local colorscheme = action_state.get_selected_entry()[1]
-              vim.cmd.colorscheme(colorscheme)
-              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
-              local new_data = 'colorscheme = "' .. colorscheme .. '"'
-              vim.g.colorscheme = colorscheme
-              replace(old, new_data)
+              replace_colorscheme()
             end)
 
             map("i", "<Up>", function()
               actions.move_selection_previous(prompt_bufnr)
-              local colorscheme = action_state.get_selected_entry()[1]
-              vim.cmd.colorscheme(colorscheme)
-              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
-              local new_data = 'colorscheme = "' .. colorscheme .. '"'
-              vim.g.colorscheme = colorscheme
-              replace(old, new_data)
+              replace_colorscheme()
             end)
 
             map("i", "<C-k>", function()
               actions.move_selection_previous(prompt_bufnr)
-              local colorscheme = action_state.get_selected_entry()[1]
-              vim.cmd.colorscheme(colorscheme)
-              local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
-              local new_data = 'colorscheme = "' .. colorscheme .. '"'
-              vim.g.colorscheme = colorscheme
-              replace(old, new_data)
+              replace_colorscheme()
+            end)
+
+            map("n", "j", function()
+              actions.move_selection_next(prompt_bufnr)
+              replace_colorscheme()
+            end)
+
+            map("n", "k", function()
+              actions.move_selection_previous(prompt_bufnr)
+              replace_colorscheme()
             end)
 
             ------------ save theme to aomerc on enter ----------------

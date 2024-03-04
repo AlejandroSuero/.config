@@ -51,6 +51,11 @@ local mappings = {
       "Formats current buffer if lsp available",
     },
 
+    ["<leader>e"] = {
+      vim.diagnostic.open_float,
+      "Show diagnostic error messages",
+    },
+
     -- quickfix navigation
     ["<C-k>"] = { "<cmd>cnext<CR>zz", "Next quickfix item" },
     ["<C-j>"] = { "<cmd>cprev<CR>zz", "Previous quickfix item" },

@@ -39,7 +39,11 @@ local options = {
 
     winblend = 0,
 
-    updatetime = 50,
+    updatetime = 250,
+    timeoutlen = 300,
+
+    splitright = true,
+    splitbelow = true,
 
     colorcolumn = "80",
     showmode = false,

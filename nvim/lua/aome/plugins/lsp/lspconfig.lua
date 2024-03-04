@@ -12,6 +12,14 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
+    -- Automatically install LSPs and related tools to stdpath for neovim
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+
+    -- Useful status updates for LSP.
+    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+    { "j-hui/fidget.nvim", opts = {} },
   },
   config = function()
     -- import lspconfig plugin
@@ -23,82 +31,94 @@ return {
       return
     end
 
-    local opts = { noremap = true, silent = true }
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("aome-lsp-attach", { clear = true }),
+      callback = function(event)
+        local opts = { noremap = true, silent = true, buffer = event.buf }
 
-    -- Function that runs when server is attached to buffer
-    ---@param client table Client
-    ---@param bufnr integer Number of buffer
-    local on_attach = function(client, bufnr)
-      opts.buffer = bufnr
-      client.server_capabilities.signatureHelpProvider =
-        client.server_capabilities.signatureHelpProvider
+        local mappings = {
+          n = {
+            ["gR"] = {
+              telescope_builtin.lsp_references,
+              "LSP show references",
+            },
+            ["gD"] = {
+              vim.lsp.buf.declaration,
+              "LSP go to declaration",
+            },
+            ["gd"] = {
+              telescope_builtin.lsp_definitions,
+              "LSP show definitions",
+            },
+            ["gi"] = {
+              telescope_builtin.lsp_implementations,
+              "LSP show implementations",
+            },
+            ["gt"] = {
+              telescope_builtin.lsp_type_definitions,
+              "LSP show type definitions",
+            },
+            ["<leader>ca"] = {
+              vim.lsp.buf.code_action,
+              "LSP see available code actions",
+            },
+            ["<leader>rn"] = {
+              vim.lsp.buf.rename,
+              "LSP rename",
+            },
+            ["<leader>D"] = {
+              function()
+                telescope_builtin.diagnostics { bufnr = event.buf }
+              end,
+              "LSP show buffer diagnostics",
+            },
+            ["[d"] = {
+              vim.diagnostic.goto_prev,
+              "LSP go to previous diagnostic",
+            },
+            ["]d"] = {
+              vim.diagnostic.goto_next,
+              "LSP go to next diagnostic",
+            },
+            ["<leader>ld"] = {
+              vim.diagnostic.open_float,
+              "LSP show line diagnostic",
+            },
+            ["K"] = {
+              vim.lsp.buf.hover,
+              "LSP show documentation under cursor",
+            },
+          },
+          i = {
+            ["<C-h>"] = {
+              vim.lsp.buf.signature_help,
+              "LSP show signature",
+            },
+          },
+        }
+        require("aome.core.utils").map_keys(mappings, opts)
 
-      local mappings = {
-        n = {
-          ["gR"] = {
-            telescope_builtin.lsp_references,
-            "LSP show references",
-          },
-          ["gD"] = {
-            vim.lsp.buf.declaration,
-            "LSP go to declaration",
-          },
-          ["gd"] = {
-            telescope_builtin.lsp_definitions,
-            "LSP show definitions",
-          },
-          ["gi"] = {
-            telescope_builtin.lsp_implementations,
-            "LSP show implementations",
-          },
-          ["gt"] = {
-            telescope_builtin.lsp_type_definitions,
-            "LSP show type definitions",
-          },
-          ["<leader>ca"] = {
-            vim.lsp.buf.code_action,
-            "LSP see available code actions",
-          },
-          ["<leader>rn"] = {
-            vim.lsp.buf.rename,
-            "LSP rename",
-          },
-          ["<leader>D"] = {
-            function()
-              telescope_builtin.diagnostics { bufnr = bufnr }
-            end,
-            "LSP show buffer diagnostics",
-          },
-          ["[d"] = {
-            vim.diagnostic.goto_prev,
-            "LSP go to previous diagnostic",
-          },
-          ["]d"] = {
-            vim.diagnostic.goto_next,
-            "LSP go to next diagnostic",
-          },
-          ["<leader>ld"] = {
-            vim.diagnostic.open_float,
-            "LSP show line diagnostic",
-          },
-          ["K"] = {
-            vim.lsp.buf.hover,
-            "LSP show documentation under cursor",
-          },
-        },
-        i = {
-          ["<C-h>"] = {
-            vim.lsp.buf.signature_help,
-            "LSP show signature",
-          },
-        },
-      }
-      require("aome.core.utils").map_keys(mappings, opts)
-    end
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client and client.server_capabilities.documentHighlightProvider then
+          vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            buffer = event.buf,
+            callback = vim.lsp.buf.document_highlight,
+          })
 
-    -- used to enable autocompletion (assign to every lsp server config)
-    -- local capabilities = cmp_nvim_lsp.default_capabilities()
+          vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+            buffer = event.buf,
+            callback = vim.lsp.buf.clear_references,
+          })
+        end
+      end,
+    })
+
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend(
+      "force",
+      capabilities,
+      require("cmp_nvim_lsp").default_capabilities()
+    )
 
     capabilities.textDocument.completion.completionItem = {
       documentationFormat = { "markdown", "plaintext" },
@@ -120,8 +140,7 @@ return {
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     -- (not in youtube nvim video)
-    local signs =
-      { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -194,13 +213,14 @@ return {
       lua_ls = {
         settings = { -- custom settings for lua
           Lua = {
-            -- make the language server recognize "vim" global
-            diagnostics = {
-              globals = { "vim" },
+            runtime = {
+              version = "LuaJIT",
             },
             workspace = {
               -- make language server aware of runtime files
               library = {
+                "${3rd}/luv/library",
+                unpack(vim.api.nvim_get_runtime_file("", true)),
                 [vim.fn.expand "$VIMRUNTIME/lua"] = true,
                 [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
                 [vim.fn.stdpath "config" .. "lua/aome"] = true,
@@ -249,34 +269,34 @@ return {
         },
       },
       clangd = {
-        on_attach = function(client, bufnr)
-          client.server_capabilities.signatureHelpProvider = false
-          on_attach(client, bufnr)
-        end,
         capabilities = capabilities,
       },
     }
 
-    ---Setup given server with given configuration, adding on_attach and
-    --capabilities to all by default
-    ---@param server string
-    ---@param config table|boolean|nil
-    local setup_server = function(server, config)
-      if not config then
-        return
-      end
-      if type(config) ~= "table" then
-        config = {}
-      end
-      config = vim.tbl_deep_extend("force", {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }, config)
-      lspconfig[server].setup(config)
-    end
+    local mason_configs = require "aome.plugins.lsp.configs.mason"
 
-    for server, config in pairs(servers) do
-      setup_server(server, config)
-    end
+    -- You can add other tools here that you want Mason to install
+    -- for you, so that they are available from within Neovim.
+    local ensure_installed = vim.tbl_keys(servers or {})
+    vim.list_extend(ensure_installed, mason_configs.ensure_installed)
+    require("mason-tool-installer").setup { ensure_installed = ensure_installed }
+
+    require("mason-lspconfig").setup {
+      handlers = {
+        function(server_name)
+          local server = servers[server_name] or {}
+          -- This handles overriding only values explicitly passed
+          -- by the server configuration above. Useful when disabling
+          -- certain features of an LSP (for example, turning off formatting for tsserver)
+          server.capabilities = vim.tbl_deep_extend(
+            "force",
+            {},
+            capabilities,
+            server.capabilities or {}
+          )
+          lspconfig[server_name].setup(server)
+        end,
+      },
+    }
   end,
 }
