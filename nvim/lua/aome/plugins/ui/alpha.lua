@@ -7,6 +7,12 @@ return {
     local dashboard = require "alpha.themes.dashboard"
 
     local lazy_path = vim.fn.stdpath "config" .. "/lua/aome/lazy.lua"
+    local nvim_version = "v"
+      .. vim.version().major
+      .. "."
+      .. vim.version().minor
+      .. "."
+      .. vim.version().patch
 
     -- Set header
     dashboard.section.header.val = {
@@ -51,7 +57,7 @@ return {
       " ",
       " ",
       " ",
-      "NVIM version v" .. vim.version().minor .. "." .. vim.version().patch,
+      "NVIM version " .. nvim_version,
     }
 
     -- Send config to alpha

@@ -14,8 +14,23 @@ local select = function()
       return
     end
     if choice == "Push -u" then
-      local branch = vim.fn.input "Branch to push from -> "
-      vim.cmd("Git push origin " .. branch)
+      local branch = vim.ui.input(
+        { prompt = "Branch to push from: empty = main" },
+        function(input)
+          if input == nil then
+            vim.notify("No input", vim.log.levels.WARN)
+            return nil
+          end
+          if input == "" then
+            vim.notify("No input, using default (main)", vim.log.levels.WARN)
+            return "main"
+          end
+          return input
+        end
+      )
+      if branch ~= nil then
+        vim.cmd("Git push origin " .. branch)
+      end
     elseif choice == "Fetch" then
       vim.cmd "Git fetch --all -p"
     else
