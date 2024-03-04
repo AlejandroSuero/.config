@@ -52,6 +52,10 @@ local options = {
     listchars = {
       trail = " ",
     },
+
+    fillchars = {
+      eob = " ",
+    },
   },
   g = { -- global scope
     netrw_banner = false,
