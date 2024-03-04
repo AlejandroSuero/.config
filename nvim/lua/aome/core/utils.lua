@@ -33,7 +33,7 @@ M.map_keys = function(mappings_table, mapping_opt)
     local default_opts =
       vim.tbl_deep_extend("force", { mode = mode }, mapping_opt or {})
 
-    for keybind, mapping_info in pairs(mappings) do
+    for lhs, mapping_info in pairs(mappings) do
       if type(mapping_info) ~= "table" then
         mapping_info = { mapping_info }
       end
@@ -42,8 +42,9 @@ M.map_keys = function(mappings_table, mapping_opt)
 
       mapping_info.opts, opts.mode = nil, nil
       opts.desc = mapping_info[2] or "No description added"
+      local rhs = mapping_info[1]
 
-      vim.keymap.set(mode, keybind, mapping_info[1], opts)
+      vim.keymap.set(mode, lhs, rhs, opts)
     end
   end
 end
