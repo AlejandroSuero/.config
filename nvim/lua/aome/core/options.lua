@@ -40,7 +40,8 @@ local options = {
     winblend = 0,
 
     updatetime = 250,
-    timeoutlen = 300,
+    timeoutlen = 500,
+    ttimeoutlen = 500,
 
     splitright = true,
     splitbelow = true,
