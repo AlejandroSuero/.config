@@ -63,6 +63,11 @@ local options = {
     netrw_browse_split = 0,
     netrw_winsize = 25,
     netrw_list_hide = "node_modules",
+    -- List style
+    -- -> 0 = thin listing (default)
+    -- -> 1 = long listing
+    -- -> 3 = tree listing
+    netrw_liststyle = 3,
 
     mapleader = " ",
     maplocalleader = ",",
