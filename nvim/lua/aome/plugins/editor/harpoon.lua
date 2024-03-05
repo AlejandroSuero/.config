@@ -5,7 +5,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local harpoon = require "harpoon"
-    harpoon:setup()
+    harpoon:setup {}
 
     local mappings = {
       n = {
@@ -33,32 +33,14 @@ return {
           end,
           "[Harpoon] Navigate to previous item",
         },
-        ["<leader>1"] = {
-          function()
-            harpoon:list():select(1)
-          end,
-          "[Harpoon] Navigate to item 1",
-        },
-        ["<leader>2"] = {
-          function()
-            harpoon:list():select(2)
-          end,
-          "[Harpoon] Navigate to item 2",
-        },
-        ["<leader>3"] = {
-          function()
-            harpoon:list():select(3)
-          end,
-          "[Harpoon] Navigate to item 3",
-        },
-        ["<leader>4"] = {
-          function()
-            harpoon:list():select(4)
-          end,
-          "[Harpoon] Navigate to item 4",
-        },
       },
     }
+    -- Mappings for <leader>n where n is a number 1 -> 9
+    for i = 1, 9, 1 do
+      vim.keymap.set("n", "<leader>" .. tostring(i), function()
+        harpoon:list():select(i)
+      end, { desc = "[Harpoon] Navigate to item " .. tostring(i) })
+    end
     require("aome.core.utils").map_keys(mappings)
   end,
 }
