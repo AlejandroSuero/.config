@@ -144,6 +144,7 @@ return {
       pickers = {
         colorscheme = {
           prompt_prefix = " 󰏘 ",
+          enable_preview = true,
           attach_mappings = function(prompt_bufnr, map)
             -- reload theme while typing
             vim.schedule(function()
@@ -214,12 +215,7 @@ return {
             actions.select_default:replace(function()
               if action_state.get_selected_entry() then
                 actions.close(prompt_bufnr)
-                local colorscheme = action_state.get_selected_entry()[1]
-                vim.cmd.colorscheme(colorscheme)
-                local old = 'colorscheme = "' .. vim.g.colorscheme .. '"'
-                local new_data = 'colorscheme = "' .. colorscheme .. '"'
-                vim.g.colorscheme = colorscheme
-                replace(old, new_data)
+                replace_colorscheme()
               end
             end)
             return true
