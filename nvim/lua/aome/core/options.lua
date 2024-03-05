@@ -67,7 +67,7 @@ local options = {
     -- -> 0 = thin listing (default)
     -- -> 1 = long listing
     -- -> 3 = tree listing
-    netrw_liststyle = 3,
+    netrw_liststyle = vim.g.aome_netrw,
 
     mapleader = " ",
     maplocalleader = ",",

@@ -11,7 +11,8 @@ M.load_config = function()
       io.open(vim.fn.stdpath "config" .. "/lua/aome/core/aomerc.lua", "w")
     if file ~= nil then
       file:write "vim.g.transparency = false\n"
-      file:write 'vim.g.colorscheme = "kanagawa"'
+      file:write 'vim.g.colorscheme = "kanagawa"\n'
+      file:write "vim.g.aome_netrw = 0"
       file:close()
       require "aome.core.aomerc"
     else
