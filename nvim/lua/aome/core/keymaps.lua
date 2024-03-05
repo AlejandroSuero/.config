@@ -57,8 +57,28 @@ local mappings = {
     },
 
     -- quickfix navigation
-    ["<C-k>"] = { "<cmd>cnext<CR>zz", "Next quickfix item" },
-    ["<C-j>"] = { "<cmd>cprev<CR>zz", "Previous quickfix item" },
+    ["<C-n>"] = { "<cmd>cnext<CR>zz", "Next quickfix item" },
+    ["<C-p>"] = { "<cmd>cprev<CR>zz", "Previous quickfix item" },
+
+    -- Window
+    ["<C-h>"] = { "<C-w>h", "Window Navigate left" },
+    ["<C-j>"] = { "<C-w>j", "Window Navigate down" },
+    ["<C-k>"] = { "<C-w>k", "Window Navigate up" },
+    ["<C-l>"] = { "<C-w>l", "Window Navigate right" },
+
+    ["<leader>sj"] = { "<cmd>split<CR>", "[w]indow [s]plit down" },
+    ["<leader>sl"] = { "<cmd>vsplit<cr>", "[w]indow [s]plit right" },
+
+    -- Tab
+    ["<leader>te"] = { ":tabedit ", "[t]ab [e]dit" },
+    ["<leader>tc"] = { "<cmd>tabclose<CR>", "[t]ab [c]lose" },
+    ["<leader>tn"] = { "<cmd>tabnext<CR>", "[t]ab [n]next" },
+    ["<leader>tp"] = { "<cmd>tabnext<CR>", "[t]ab [p]revious" },
+
+    -- Utilities
+    ["+"] = { "<C-a>", "Increment" },
+    ["-"] = { "<C-x>", "Decrement" },
+    ["<C-a>"] = { "gg<S-v>G", "Select all" },
 
     ["<leader>x"] = {
       "<cmd>!chmod +x %<CR>",
@@ -79,8 +99,7 @@ local mappings = {
       "Go edit " .. plugins_path,
     },
 
-    ["<leader>tx"] = { vim.cmd.tabclose, "Closes current tab" },
-    ["<leader>bx"] = {
+    ["<leader>bc"] = {
       function()
         if not vim.bo.modified then
           vim.cmd "bdelete"
