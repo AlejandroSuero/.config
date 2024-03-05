@@ -31,7 +31,6 @@ return {
     "pyright",
     "gopls",
     "rust-analyzer",
-    "phpactor",
     "astro-language-server",
     "json-lsp",
     "eslint-lsp",
