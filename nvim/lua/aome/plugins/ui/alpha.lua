@@ -14,9 +14,13 @@ return {
       .. "."
       .. vim.version().patch
 
+    local header = dashboard.section.header
+    local footer = dashboard.section.footer
+    local buttons = dashboard.section.buttons
+
     -- Set header
-    dashboard.section.header.val = {
-      "                                        ",
+    header.val = {
+      "                                        ", -- 41
       "                 青目                   ",
       "                                        ",
       "   █████╗  ██████╗ ███╗   ███╗███████╗  ",
@@ -26,13 +30,29 @@ return {
       "  ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗  ",
       "  ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝  ",
       "                                        ",
-      "    󰝚 I'm Blue da ba dee da ba daa 󰝚    ",
       "                                        ",
+      "            ████████████████            ",
+      "      ██████                ██████      ",
+      "    ██      ▓▓▓▓░░░░░░░░    ░░    ██    ",
+      "  ██      ▓▓▓▓▓▓▓▓▓▓▓▓        ░░    ██  ",
+      "  ████      ▓▓▓▓▓▓▓▓▓▓▓▓    ░░    ████  ",
+      "  ██▒▒██████                ██████▒▒██  ",
+      "  ██▒▒▒▒▒▒▒▒████████████████▒▒▒▒▒▒▒▒██  ",
+      "  ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██  ",
+      "  ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██  ",
+      "  ██▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▒▒▒▒▒▒▒▒██  ",
+      "  ██▒▒██  ██▒▒▒▒▒▒▒▒▒▒▒▒██  ██▒▒▒▒▒▒██  ",
+      "  ██▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▒▒▒▒▒▒▒▒██  ",
+      "  ██░░░░▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒░░░░▒▒▒▒██  ",
+      "  ██▒▒▒▒▒▒▒▒▒▒████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒██  ",
+      "    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██    ",
+      "      ██████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██████      ",
+      "            ████████████████            ",
       "                                        ",
     }
 
     -- Set menu
-    dashboard.section.buttons.val = {
+    buttons.val = {
       dashboard.button("e", "  > New File", ":e "),
       dashboard.button("SPC ee", "  > Toggle file explorer", "<cmd>Ex<CR>"),
       dashboard.button(
@@ -53,7 +73,7 @@ return {
       dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
     }
 
-    dashboard.section.footer.val = {
+    footer.val = {
       " ",
       " ",
       " ",
