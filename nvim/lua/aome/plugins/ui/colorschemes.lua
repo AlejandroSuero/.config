@@ -31,4 +31,10 @@ return {
       require("poimandres").setup(opts)
     end,
   },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = require(configs .. "tokyonight"),
+  },
 }
