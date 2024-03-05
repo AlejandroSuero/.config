@@ -7,7 +7,7 @@ local options = {
 
     background = "dark",
 
-    cmdheight = 2,
+    cmdheight = 1,
 
     shell = env.SHELL,
 
